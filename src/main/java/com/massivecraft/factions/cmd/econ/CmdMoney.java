@@ -25,8 +25,10 @@ public class CmdMoney extends FCommand {
         super();
         this.aliases.addAll(Aliases.money_money);
 
-        //this.requiredArgs.add("");
-        //this.optionalArgs.put("","")
+        this.optionalArgs.put("action", "action");
+        this.optionalArgs.put("amount", "amount");
+        this.optionalArgs.put("from", "from");
+        this.optionalArgs.put("to", "to");
 
         this.helpLong.add(TextUtil.parseTags(TL.COMMAND_MONEY_LONG.toString()));
 
