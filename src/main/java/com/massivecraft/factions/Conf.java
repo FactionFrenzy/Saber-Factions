@@ -610,9 +610,6 @@ public class Conf {
 
         // Config is not loading if value is empty ???
         territoryBypassProtectedMaterials.add(XMaterial.COOKIE.parseMaterial());
-        territoryBypassProtectedMaterials.add(XMaterial.CHEST.parseMaterial());
-        territoryBypassProtectedMaterials.add(XMaterial.TRAPPED_CHEST.parseMaterial());
-
 
         safeZoneNerfedCreatureTypes.add(EntityType.BLAZE);
         safeZoneNerfedCreatureTypes.add(EntityType.CAVE_SPIDER);
