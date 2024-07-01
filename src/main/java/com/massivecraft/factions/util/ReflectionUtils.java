@@ -397,7 +397,16 @@ public final class ReflectionUtils {
          * @return The server version
          */
         public static String getServerVersion() {
-            return Bukkit.getServer().getClass().getPackage().getName().substring(23);
+            try {
+                return Bukkit.getServer().getClass().getPackage().getName().substring(23);
+            } catch (IndexOutOfBoundsException e) {
+                String versionFull = Bukkit.getServer().getVersion();
+                String substring = versionFull.substring(versionFull.indexOf("(") + 1, versionFull.lastIndexOf(")") - 1);
+                while (substring.contains(".")) {
+                    substring = substring.replace(".", "_");
+                }
+                return substring;
+            }
         }
 
         /**
