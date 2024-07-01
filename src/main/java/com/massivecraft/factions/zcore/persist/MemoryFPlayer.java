@@ -1317,33 +1317,44 @@ public abstract class MemoryFPlayer implements FPlayer {
     public void checkIfNearbyEnemies() {
         Player me = getPlayer();
 
-        if (me == null || me.hasPermission("factions.fly.bypassnearbyenemycheck")) return;
+        if (me == null || me.hasPermission("factions.fly.bypassnearbyenemycheck")) {
+            return;
+        }
 
         int radius = Conf.stealthFlyCheckRadius;
         boolean foundEnemy = false;
-        for (Entity entity : me.getNearbyEntities(radius, 255, radius)) {
-            if (entity instanceof Player) {
-                Player enemyPlayer = ((Player) entity);
-                if (enemyPlayer.hasMetadata("NPC")) continue;
-                FPlayer enemyFPlayer = FPlayers.getInstance().getByPlayer(enemyPlayer);
-                if (enemyFPlayer == null || !me.canSee(enemyPlayer) || enemyFPlayer.isVanished()) continue;
-                if (getRelationTo(enemyFPlayer).equals(Relation.ENEMY) && !enemyFPlayer.isStealthEnabled()) {
-                    foundEnemy = true;
-                    break;
-                }
+
+        List<Entity> nearbyEntities = me.getNearbyEntities(radius, 255, radius);
+
+        for (Entity entity : nearbyEntities) {
+            if (!(entity instanceof Player)) {
+                continue;
+            }
+
+            Player enemyPlayer = (Player) entity;
+            if (enemyPlayer.hasMetadata("NPC")) {
+                continue; // Skip NPCs
+            }
+
+            FPlayer enemyFPlayer = FPlayers.getInstance().getByPlayer(enemyPlayer);
+            if (enemyFPlayer == null || !me.canSee(enemyPlayer) || enemyFPlayer.isVanished()) {
+                continue; // Skip invalid or vanished players
+            }
+
+            if (getRelationTo(enemyFPlayer) == Relation.ENEMY && !enemyFPlayer.isStealthEnabled()) {
+                foundEnemy = true;
+                break;
             }
         }
 
-        if (foundEnemy) {
-            if (me.isFlying()) {
-                setFlying(false);
-                msg(TL.COMMAND_FLY_ENEMY_NEAR);
-                Bukkit.getServer().getPluginManager().callEvent(new FPlayerStoppedFlying(this));
-            }
-            enemiesNearby = true;
-        } else {
-            enemiesNearby = false;
+        if (foundEnemy && me.isFlying()) {
+            setFlying(false);
+            msg(TL.COMMAND_FLY_ENEMY_NEAR);
+            Bukkit.getServer().getPluginManager().callEvent(new FPlayerStoppedFlying(this));
         }
+
+        // Update the enemiesNearby flag
+        enemiesNearby = foundEnemy;
     }
 
     @Override
