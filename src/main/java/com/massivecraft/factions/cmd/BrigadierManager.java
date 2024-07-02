@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import com.mojang.brigadier.tree.CommandNode;
 import me.lucko.commodore.Commodore;
 import me.lucko.commodore.CommodoreProvider;
 
@@ -30,13 +31,14 @@ public class BrigadierManager {
 
         for (FCommand command : cmdBase.subCommands) {
             List<ArgumentBuilder<Object, ?>> aliases = addCommand(command, factionsBrigadier);
-            List<ArgumentBuilder<Object, ?>> fAliases = addCommand(command, fBrigadier);
-            aliases.forEach(factionsBrigadier::then);
-            fAliases.forEach(fBrigadier::then);
+            aliases.forEach(alias -> {
+                factionsBrigadier.then(alias);
+                fBrigadier.then(alias);
+            });
         }
 
-        commodore.register(fBrigadier.build());
         commodore.register(factionsBrigadier.build());
+        commodore.register(fBrigadier.build());
     }
 
     private List<ArgumentBuilder<Object, ?>> addCommand(FCommand command, ArgumentBuilder<Object, ?> parent) {
