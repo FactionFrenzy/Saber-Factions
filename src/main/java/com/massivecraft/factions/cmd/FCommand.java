@@ -120,9 +120,6 @@ public abstract class FCommand {
 
     public void addSubCommand(FCommand subCommand) {
         this.subCommands.add(subCommand);
-        if (subCommand.requirements.getBrigadier() != null) {
-            System.out.println("Brigadier: " + subCommand.requirements.getBrigadier().getName());
-        }
     }
 
     public String getHelpShort() {
