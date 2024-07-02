@@ -1,13 +1,16 @@
 package com.massivecraft.factions.cmd;
 
 import com.massivecraft.factions.FactionsPlugin;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import me.lucko.commodore.Commodore;
 import me.lucko.commodore.CommodoreProvider;
-import org.bukkit.command.PluginCommand;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BrigadierManager {
@@ -15,94 +18,44 @@ public class BrigadierManager {
     private final Commodore commodore;
 
     public BrigadierManager() {
-
         commodore = CommodoreProvider.getCommodore(FactionsPlugin.getInstance());
     }
 
     public void build() {
-/*        commodore.register(brigadier.build());
-
-        // Register 'f' alias with all children of 'factions'
-        LiteralArgumentBuilder<Object> fLiteral = LiteralArgumentBuilder.literal("f");
-        for (CommandNode<Object> node : brigadier.getArguments()) {
-
-            fLiteral.then(node);
-        }
-        commodore.register(fLiteral.build());*/
-        PluginCommand pluginCommand = FactionsPlugin.getInstance().getCommand("factions");
-
         FCmdRoot cmdBase = FCmdRoot.instance;
-        LiteralArgumentBuilder<?> brigadier = addCommands(cmdBase.subCommands, LiteralArgumentBuilder.literal("factions"));
-        commodore.register(pluginCommand, brigadier);
-    }
+        LiteralArgumentBuilder<Object> factionsBrigadier = LiteralArgumentBuilder.literal("factions");
+        LiteralArgumentBuilder<Object> fBrigadier = LiteralArgumentBuilder.literal("f");
 
-    private LiteralArgumentBuilder<Object> addCommands(List<FCommand> commands, LiteralArgumentBuilder<Object> parent) {
-        for (FCommand subCommand : commands) {
-            for (String alias : subCommand.aliases) {
-                System.out.println("Adding command " + alias);
-                LiteralArgumentBuilder<Object> literal = LiteralArgumentBuilder.literal(alias);
-
-                List<LiteralArgumentBuilder<Object>> subCommands = subCommand.subCommands.stream().map(subCmd -> this.addCommands(subCmd.subCommands, literal)).collect(Collectors.toList());
-                for (LiteralArgumentBuilder<Object> subCmd : subCommands) {
-                    System.out.println("Added subcommand " + subCmd.getLiteral() + " to " + literal.getLiteral());
-                    literal.then(subCmd);
-                }
-
-                parent.then(literal);
-            }
+        for (FCommand command : cmdBase.subCommands) {
+            List<LiteralArgumentBuilder<Object>> aliases = addCommand(command);
+            aliases.forEach(alias -> {
+                factionsBrigadier.then(alias);
+                fBrigadier.then(alias);
+            });
         }
 
-/*        for (String alias : command.aliases) {
-            System.out.println("Adding command " + alias);
-            LiteralArgumentBuilder<Object> literal = LiteralArgumentBuilder.literal(alias);
-
-            List<LiteralArgumentBuilder<Object>> subCommands = command.subCommands.stream().map(subCommand -> this.addSubCommands(subCommand, literal)).collect(Collectors.toList());
-            for (LiteralArgumentBuilder<Object> subCommand : subCommands) {
-                *//*literal.then(subCommand);*//*
-                System.out.println("Added subcommand " + subCommand.getLiteral() + " to " + literal.getLiteral());
-            }
-
-            parent.then(literal);
-        }*/
-
-        return parent;
-/*        LiteralArgumentBuilder<Object> literal = LiteralArgumentBuilder.literal(command.aliases.get(0));
-        List<LiteralArgumentBuilder<Object>> subCommands = command.subCommands.stream().map(this::addCommand).collect(Collectors.toList());
-        for (LiteralArgumentBuilder<Object> subCommand : subCommands) {
-            literal.then(subCommand);
-        }
-        return literal;*/
+        commodore.register(factionsBrigadier.build());
+        commodore.register(fBrigadier.build());
     }
 
-    public void addSubCommand(FCommand subCommand) {
-        //System.out.println("Added subcommand " + subCommand.aliases.get(0));
-/*        for (String alias : subCommand.aliases) {
-            LiteralArgumentBuilder<Object> literal = LiteralArgumentBuilder.literal(alias);
+    private List<LiteralArgumentBuilder<Object>> addCommand(FCommand command) {
+        List<LiteralArgumentBuilder<Object>> aliases = command.aliases.stream()
+                .map(alias -> createCommandAliasLiteral(command, alias))
+                .collect(Collectors.toList());
 
-            if (subCommand.requirements.getBrigadier() != null) {
-                registerUsingProvider(subCommand, literal);
-            } else {
-                registerGeneratedBrigadier(subCommand, literal);
-            }
-        }*/
+        aliases.forEach(literal -> {
+            // Add subcommands to the current command
+            List<FCommand> subCommands = command.subCommands;
+            subCommands.stream().map(this::addCommand).forEach(subLiterals -> subLiterals.forEach(literal::then));
+        });
+        return aliases;
     }
 
-    private void registerUsingProvider(FCommand subCommand, LiteralArgumentBuilder<Object> literal) {
-        System.out.println("Registered using provider " + subCommand.aliases.get(0));
-/*        Class<? extends BrigadierProvider> brigadierProvider = subCommand.requirements.getBrigadier();
-        try {
-            Constructor<? extends BrigadierProvider> constructor = brigadierProvider.getDeclaredConstructor();
-            brigadier.then(constructor.newInstance().get(literal));
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                 InvocationTargetException exception) {
-            exception.printStackTrace();
-        }*/
-    }
+    private LiteralArgumentBuilder<Object> createCommandAliasLiteral(FCommand command, String alias) {
+        LiteralArgumentBuilder<Object> literal = LiteralArgumentBuilder.literal(alias);
 
-    private void registerGeneratedBrigadier(FCommand subCommand, LiteralArgumentBuilder<Object> literal) {
-        System.out.println("Registered generated brigadier " + subCommand.aliases.get(0));
-/*        List<RequiredArgumentBuilder<Object, ?>> argsStack = generateArgsStack(subCommand);
-
+        // Add the arguments to the command
+        List<RequiredArgumentBuilder<Object, ?>> argsStack = generateArgsStack(command);
         RequiredArgumentBuilder<Object, ?> previous = null;
         for (int i = argsStack.size() - 1; i >= 0; i--) {
             if (previous == null) {
@@ -111,17 +64,15 @@ public class BrigadierManager {
                 previous = argsStack.get(i).then(previous);
             }
         }
+        if (previous != null) {
+            literal.then(previous);
+        }
 
-        if (previous == null) {
-            brigadier.then(literal);
-        } else {
-            brigadier.then(literal.then(previous));
-        }*/
+        return literal;
     }
 
     private List<RequiredArgumentBuilder<Object, ?>> generateArgsStack(FCommand subCommand) {
-        System.out.println("generated args stack " + subCommand.aliases.get(0));
-/*        List<RequiredArgumentBuilder<Object, ?>> stack = new ArrayList<>(subCommand.requiredArgs.size() + subCommand.optionalArgs.size());
+        List<RequiredArgumentBuilder<Object, ?>> stack = new ArrayList<>(subCommand.requiredArgs.size() + subCommand.optionalArgs.size());
 
         for (String required : subCommand.requiredArgs) {
             stack.add(RequiredArgumentBuilder.argument(required, StringArgumentType.word()));
@@ -137,7 +88,6 @@ public class BrigadierManager {
             stack.add(optional);
         }
 
-        return stack;*/
-        return null;
+        return stack;
     }
 }
