@@ -5,7 +5,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import com.mojang.brigadier.tree.CommandNode;
 import me.lucko.commodore.Commodore;
 import me.lucko.commodore.CommodoreProvider;
 
@@ -30,7 +29,7 @@ public class BrigadierManager {
         LiteralArgumentBuilder<Object> fBrigadier = LiteralArgumentBuilder.literal("f");
 
         for (FCommand command : cmdBase.subCommands) {
-            List<ArgumentBuilder<Object, ?>> aliases = addCommand(command, factionsBrigadier);
+            List<ArgumentBuilder<Object, ?>> aliases = addCommand(command);
             aliases.forEach(alias -> {
                 factionsBrigadier.then(alias);
                 fBrigadier.then(alias);
@@ -41,20 +40,20 @@ public class BrigadierManager {
         commodore.register(fBrigadier.build());
     }
 
-    private List<ArgumentBuilder<Object, ?>> addCommand(FCommand command, ArgumentBuilder<Object, ?> parent) {
+    private List<ArgumentBuilder<Object, ?>> addCommand(FCommand command) {
         List<ArgumentBuilder<Object, ?>> aliases = command.aliases.stream()
-                .map(alias -> createCommandAliasLiteral(command, alias, parent))
+                .map(alias -> createCommandAliasLiteral(command, alias))
                 .collect(Collectors.toList());
 
         aliases.forEach(literal -> {
             // Add subcommands to the current command
             List<FCommand> subCommands = command.subCommands;
-            subCommands.stream().map(subCmd -> this.addCommand(subCmd, literal)).forEach(subLiterals -> subLiterals.forEach(literal::then));
+            subCommands.stream().map(this::addCommand).forEach(subLiterals -> subLiterals.forEach(literal::then));
         });
         return aliases;
     }
 
-    private ArgumentBuilder<Object, ?> createCommandAliasLiteral(FCommand command, String alias, ArgumentBuilder<Object, ?> parent) {
+    private ArgumentBuilder<Object, ?> createCommandAliasLiteral(FCommand command, String alias) {
         LiteralArgumentBuilder<Object> literal = LiteralArgumentBuilder.literal(alias);
         Class<? extends BrigadierProvider> brigadier = command.requirements.getBrigadier();
         if (brigadier != null) {
