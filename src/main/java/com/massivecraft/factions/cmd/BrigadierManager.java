@@ -49,7 +49,7 @@ public class BrigadierManager {
         aliases.forEach(literal -> {
             // Add subcommands to the current command
             List<FCommand> subCommands = command.subCommands;
-            subCommands.stream().map(subCmd -> this.addCommand(subCmd, literal)).forEach(subLiterals -> subLiterals.forEach(literal::then));
+            subCommands.stream().map(this::addCommand).forEach(subLiterals -> subLiterals.forEach(literal::then));
         });
         return aliases;
     }
