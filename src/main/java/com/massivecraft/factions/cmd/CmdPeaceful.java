@@ -14,11 +14,11 @@ public class CmdPeaceful extends FCommand {
 
     public CmdPeaceful() {
         super();
-        this.aliases.addAll(Aliases.peaceful);
-        this.requiredArgs.add("faction tag");
+        this.getAliases().addAll(Aliases.peaceful);
+        this.getRequiredArgs().add("faction tag");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SET_PEACEFUL)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.SET_PEACEFUL)
+                .build());
 
     }
 

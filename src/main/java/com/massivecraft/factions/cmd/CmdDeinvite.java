@@ -20,14 +20,14 @@ public class CmdDeinvite extends FCommand {
 
     public CmdDeinvite() {
         super();
-        this.aliases.addAll(Aliases.deinvite);
+        this.getAliases().addAll(Aliases.deinvite);
 
-        this.optionalArgs.put("player name", "name");
+        this.getOptionalArgs().put("player name", "name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.DEINVITE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.DEINVITE)
                 .withAction(PermissableAction.INVITE)
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

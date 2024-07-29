@@ -22,18 +22,18 @@ public class CmdCheck extends FCommand {
      * @author Driftay
      */
 
-    private SimpleDateFormat simpleDateFormat;
+    private final SimpleDateFormat simpleDateFormat;
 
     public CmdCheck() {
         this.simpleDateFormat = new SimpleDateFormat(Conf.dateFormat);
-        this.aliases.addAll(Aliases.check);
-        this.requiredArgs.add("walls/buffers/settings/leaderboard");
+        this.getAliases().addAll(Aliases.check);
+        this.getRequiredArgs().add("walls/buffers/settings/leaderboard");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CHECK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CHECK)
                 .playerOnly()
                 .withAction(PermissableAction.CHECK)
                 .memberOnly()
-                .build();
+                .build());
     }
 
 

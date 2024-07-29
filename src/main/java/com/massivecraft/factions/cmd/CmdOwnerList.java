@@ -15,12 +15,12 @@ public class CmdOwnerList extends FCommand {
 
     public CmdOwnerList() {
         super();
-        this.aliases.addAll(Aliases.owner_list);
+        this.getAliases().addAll(Aliases.owner_list);
 
-        this.requirements = new CommandRequirements.Builder(Permission.OWNERLIST)
+        this.setRequirements(new CommandRequirements.Builder(Permission.OWNERLIST)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

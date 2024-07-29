@@ -13,13 +13,13 @@ public class CmdDelFWarp extends FCommand {
 
     public CmdDelFWarp() {
         super();
-        this.aliases.addAll(Aliases.deletefwarp);
-        this.requiredArgs.add("warp name");
+        this.getAliases().addAll(Aliases.deletefwarp);
+        this.getRequiredArgs().add("warp name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETWARP)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETWARP)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

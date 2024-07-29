@@ -13,45 +13,43 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+
 public class MapFLocToStringSetTypeAdapter implements JsonDeserializer<Map<FLocation, Set<String>>>, JsonSerializer<Map<FLocation, Set<String>>> {
 
     @Override
     public Map<FLocation, Set<String>> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        Map<FLocation, Set<String>> locationMap = new ConcurrentHashMap<>();
+
         try {
             JsonObject obj = json.getAsJsonObject();
             if (obj == null) {
                 return null;
             }
 
-            Map<FLocation, Set<String>> locationMap = new ConcurrentHashMap<>();
-            Set<String> nameSet;
-            Iterator<JsonElement> iter;
-            String worldName;
-            String[] coords;
-            int x, z;
-
             for (Entry<String, JsonElement> entry : obj.entrySet()) {
-                worldName = entry.getKey();
-                for (Entry<String, JsonElement> entry2 : entry.getValue().getAsJsonObject().entrySet()) {
-                    coords = entry2.getKey().trim().split("[,\\s]+");
-                    x = Integer.parseInt(coords[0]);
-                    z = Integer.parseInt(coords[1]);
+                String worldName = entry.getKey();
+                JsonObject coordsObj = entry.getValue().getAsJsonObject();
 
-                    nameSet = new HashSet<>();
-                    iter = entry2.getValue().getAsJsonArray().iterator();
-                    while (iter.hasNext()) nameSet.add(iter.next().getAsString());
+                for (Entry<String, JsonElement> entry2 : coordsObj.entrySet()) {
+                    String[] coords = entry2.getKey().trim().split("[,\\s]+");
+                    int x = Integer.parseInt(coords[0]);
+                    int z = Integer.parseInt(coords[1]);
+
+                    Set<String> nameSet = new HashSet<>();
+                    for (JsonElement elem : entry2.getValue().getAsJsonArray()) {
+                        nameSet.add(elem.getAsString());
+                    }
 
                     locationMap.put(FLocation.wrap(worldName, x, z), nameSet);
                 }
             }
-
-            return locationMap;
-
         } catch (Exception ex) {
             ex.printStackTrace();
-            Logger.print( "Error encountered while deserializing a Map of FLocations to String Sets.", Logger.PrefixType.WARNING);
+            Logger.print("Error encountered while deserializing a Map of FLocations to String Sets.", Logger.PrefixType.WARNING);
             return null;
         }
+
+        return locationMap;
     }
 
     @Override
@@ -59,43 +57,31 @@ public class MapFLocToStringSetTypeAdapter implements JsonDeserializer<Map<FLoca
         JsonObject obj = new JsonObject();
 
         try {
-            if (src != null) {
-                FLocation loc;
-                String locWorld;
-                Set<String> nameSet;
-                Iterator<String> iter;
-                JsonArray nameArray;
-                JsonPrimitive nameElement;
+            for (Entry<FLocation, Set<String>> entry : src.entrySet()) {
+                FLocation loc = entry.getKey();
+                String locWorld = loc.getWorldName();
+                Set<String> nameSet = entry.getValue();
 
-                for (Entry<FLocation, Set<String>> entry : src.entrySet()) {
-                    loc = entry.getKey();
-                    locWorld = loc.getWorldName();
-                    nameSet = entry.getValue();
-
-                    if (nameSet == null || nameSet.isEmpty()) {
-                        continue;
-                    }
-
-                    nameArray = new JsonArray();
-                    iter = nameSet.iterator();
-                    while (iter.hasNext()) {
-                        nameElement = new JsonPrimitive(iter.next());
-                        nameArray.add(nameElement);
-                    }
-
-                    if (!obj.has(locWorld)) {
-                        obj.add(locWorld, new JsonObject());
-                    }
-
-                    obj.get(locWorld).getAsJsonObject().add(loc.getCoordString(), nameArray);
+                if (nameSet == null || nameSet.isEmpty()) {
+                    continue;
                 }
-            }
-            return obj;
 
+                JsonArray nameArray = new JsonArray();
+                for (String name : nameSet) {
+                    nameArray.add(new JsonPrimitive(name));
+                }
+
+                if (!obj.has(locWorld)) {
+                    obj.add(locWorld, new JsonObject());
+                }
+
+                obj.get(locWorld).getAsJsonObject().add(loc.getCoordString(), nameArray);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
-            Logger.print( "Error encountered while serializing a Map of FLocations to String Sets.", Logger.PrefixType.WARNING);
-            return obj;
+            Logger.print("Error encountered while serializing a Map of FLocations to String Sets.", Logger.PrefixType.WARNING);
         }
+
+        return obj;
     }
 }

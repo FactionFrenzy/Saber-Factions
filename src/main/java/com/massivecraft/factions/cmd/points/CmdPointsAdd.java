@@ -18,14 +18,14 @@ public class CmdPointsAdd extends FCommand {
 
     public CmdPointsAdd() {
         super();
-        this.aliases.addAll(Aliases.points_add);
+        this.getAliases().addAll(Aliases.points_add);
 
-        this.requiredArgs.add("faction/player");
-        this.requiredArgs.add("# of points");
+        this.getRequiredArgs().add("faction/player");
+        this.getRequiredArgs().add("# of points");
 
 
-        this.requirements = new CommandRequirements.Builder(Permission.ADDPOINTS)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.ADDPOINTS)
+                .build());
     }
 
 

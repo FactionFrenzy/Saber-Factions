@@ -21,16 +21,16 @@ import com.massivecraft.factions.zcore.util.TL;
  */
 public class CmdDrain extends FCommand {
     public CmdDrain() {
-        this.aliases.addAll(Aliases.drain);
+        this.getAliases().addAll(Aliases.drain);
 
-        this.optionalArgs.put("amount", "money");
-        this.optionalArgs.put("role", "faction role");
+        this.getOptionalArgs().put("amount", "money");
+        this.getOptionalArgs().put("role", "faction role");
 
-        this.requirements = new CommandRequirements.Builder(Permission.DRAIN)
+        this.setRequirements(new CommandRequirements.Builder(Permission.DRAIN)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.DRAIN)
-                .build();
+                .build());
     }
 
 

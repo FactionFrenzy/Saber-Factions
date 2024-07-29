@@ -18,12 +18,12 @@ public class CmdLock extends FCommand {
 	 */
     public CmdLock() {
         super();
-        this.aliases.addAll(Aliases.lock);
-        this.optionalArgs.put("on/off", "flip");
+        this.getAliases().addAll(Aliases.lock);
+        this.getOptionalArgs().put("on/off", "flip");
 
-        this.requirements = new CommandRequirements.Builder(Permission.LOCK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.LOCK)
                 .noDisableOnLock()
-                .build();
+                .build());
     }
 
     @Override

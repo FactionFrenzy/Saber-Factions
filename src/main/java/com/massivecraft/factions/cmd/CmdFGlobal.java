@@ -17,12 +17,12 @@ public class CmdFGlobal extends FCommand {
 
     public CmdFGlobal() {
         super();
-        this.aliases.addAll(Aliases.global);
+        this.getAliases().addAll(Aliases.global);
 
-        this.requirements = new CommandRequirements.Builder(Permission.GLOBALCHAT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.GLOBALCHAT)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

@@ -25,15 +25,15 @@ public class CmdUnclaimall extends FCommand {
 
     //TODO: Add UnclaimAll Confirmation GUI
     public CmdUnclaimall() {
-        this.aliases.addAll(Aliases.unclaim_all_unsafe);
+        this.getAliases().addAll(Aliases.unclaim_all_unsafe);
 
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.UNCLAIM_ALL)
+        this.setRequirements(new CommandRequirements.Builder(Permission.UNCLAIM_ALL)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.TERRITORY) //TODO: Add Unclaimall PermissableAction
-                .build();
+                .build());
     }
 
     @Override

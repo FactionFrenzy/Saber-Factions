@@ -17,14 +17,14 @@ public class CmdMoneyBalance extends FCommand {
 
     public CmdMoneyBalance() {
         super();
-        this.aliases.addAll(Aliases.money_balance);
+        this.getAliases().addAll(Aliases.money_balance);
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("faction", "yours");
 
         this.setHelpShort(TL.COMMAND_MONEYBALANCE_SHORT.toString());
 
-        this.requirements = new CommandRequirements.Builder(Permission.MONEY_BALANCE).build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.MONEY_BALANCE).build());
     }
 
     @Override

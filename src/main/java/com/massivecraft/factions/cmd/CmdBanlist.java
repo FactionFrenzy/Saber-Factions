@@ -20,14 +20,14 @@ public class CmdBanlist extends FCommand {
 
     public CmdBanlist() {
         super();
-        this.aliases.addAll(Aliases.ban_banlist);
+        this.getAliases().addAll(Aliases.ban_banlist);
 
-        this.optionalArgs.put("faction", "faction");
+        this.getOptionalArgs().put("faction", "faction");
 
-        this.requirements = new CommandRequirements.Builder(Permission.BAN)
+        this.setRequirements(new CommandRequirements.Builder(Permission.BAN)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

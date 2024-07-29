@@ -22,12 +22,12 @@ public class CmdGrace extends FCommand {
 
     public CmdGrace() {
         super();
-        this.aliases.addAll(Aliases.grace);
+        this.getAliases().addAll(Aliases.grace);
 
-        this.optionalArgs.put("on/off", "toggle");
+        this.getOptionalArgs().put("on/off", "toggle");
 
-        this.requirements = new CommandRequirements.Builder(Permission.GRACE)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.GRACE)
+                .build());
     }
 
     @Override

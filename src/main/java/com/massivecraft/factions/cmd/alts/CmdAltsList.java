@@ -19,14 +19,14 @@ public class CmdAltsList extends FCommand {
 
     public CmdAltsList() {
         super();
-        this.aliases.addAll(Aliases.alts_list);
-        this.optionalArgs.put("faction", "yours");
+        this.getAliases().addAll(Aliases.alts_list);
+        this.getOptionalArgs().put("faction", "yours");
 
 
-        this.requirements = new CommandRequirements.Builder(Permission.LIST)
+        this.setRequirements(new CommandRequirements.Builder(Permission.LIST)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
 
     }
 

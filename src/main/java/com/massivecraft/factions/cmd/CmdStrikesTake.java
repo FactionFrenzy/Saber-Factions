@@ -12,13 +12,13 @@ public class CmdStrikesTake extends FCommand {
 
     public CmdStrikesTake() {
         super();
-        this.aliases.addAll(Aliases.strikes_take);
-        this.requiredArgs.add(0, "faction");
-        this.requiredArgs.add(1, "number of strikes");
+        this.getAliases().addAll(Aliases.strikes_take);
+        this.getRequiredArgs().add(0, "faction");
+        this.getRequiredArgs().add(1, "number of strikes");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETSTRIKES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETSTRIKES)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

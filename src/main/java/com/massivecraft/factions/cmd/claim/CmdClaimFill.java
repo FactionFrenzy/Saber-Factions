@@ -28,15 +28,15 @@ public class CmdClaimFill extends FCommand {
     public CmdClaimFill() {
 
         // Aliases
-        this.aliases.addAll(Aliases.claim_claimFill);
+        this.getAliases().addAll(Aliases.claim_claimFill);
 
         // Args
-        this.optionalArgs.put("limit", String.valueOf(Conf.maxFillClaimCount));
-        this.optionalArgs.put("faction", "you");
+        this.getOptionalArgs().put("limit", String.valueOf(Conf.maxFillClaimCount));
+        this.getOptionalArgs().put("faction", "you");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CLAIM_FILL)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CLAIM_FILL)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

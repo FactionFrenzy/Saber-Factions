@@ -16,12 +16,12 @@ public class CmdGetVault extends FCommand {
 
     public CmdGetVault() {
         super();
-        this.aliases.addAll(Aliases.getvault);
+        this.getAliases().addAll(Aliases.getvault);
 
-        this.requirements = new CommandRequirements.Builder(Permission.GETVAULT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.GETVAULT)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

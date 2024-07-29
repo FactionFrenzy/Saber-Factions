@@ -11,12 +11,12 @@ public class CmdKillHolograms extends FCommand {
 
     public CmdKillHolograms() {
         super();
-        this.aliases.addAll(Aliases.killholograms);
-        this.requiredArgs.add("radius");
+        this.getAliases().addAll(Aliases.killholograms);
+        this.getRequiredArgs().add("radius");
 
-        this.requirements = new CommandRequirements.Builder(Permission.KILLHOLOS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.KILLHOLOS)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

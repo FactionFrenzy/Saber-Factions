@@ -13,16 +13,16 @@ public class CmdPaypalSet extends FCommand {
      */
 
     public CmdPaypalSet() {
-        this.aliases.addAll(Aliases.paypal_set);
+        this.getAliases().addAll(Aliases.paypal_set);
 
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requiredArgs.add("email");
+        this.getRequiredArgs().add("email");
 
-        this.requirements = new CommandRequirements.Builder(Permission.PAYPALSET)
+        this.setRequirements(new CommandRequirements.Builder(Permission.PAYPALSET)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
 
     }
 

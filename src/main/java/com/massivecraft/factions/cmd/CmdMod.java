@@ -21,14 +21,14 @@ public class CmdMod extends FCommand {
 
     public CmdMod() {
         super();
-        this.aliases.addAll(Aliases.mod);
+        this.getAliases().addAll(Aliases.mod);
 
-        this.optionalArgs.put("player name", "name");
+        this.getOptionalArgs().put("player name", "name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MOD)
+        this.setRequirements(new CommandRequirements.Builder(Permission.MOD)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

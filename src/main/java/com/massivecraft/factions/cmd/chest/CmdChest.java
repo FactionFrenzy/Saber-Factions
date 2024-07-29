@@ -15,13 +15,13 @@ public class CmdChest extends FCommand {
      * @author Illyria Team
      */
     public CmdChest() {
-        this.aliases.addAll(Aliases.chest);
+        this.getAliases().addAll(Aliases.chest);
 
-        this.requirements = new CommandRequirements.Builder(Permission.CHEST)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CHEST)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.CHEST)
-                .build();
+                .build());
     }
 
     @Override

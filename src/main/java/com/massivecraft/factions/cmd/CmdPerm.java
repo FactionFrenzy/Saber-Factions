@@ -24,17 +24,17 @@ public class CmdPerm extends FCommand {
 
     public CmdPerm() {
         super();
-        this.aliases.addAll(Aliases.perm);
+        this.getAliases().addAll(Aliases.perm);
 
-        this.optionalArgs.put("relation", "relation");
-        this.optionalArgs.put("action", "action");
-        this.optionalArgs.put("access", "access");
+        this.getOptionalArgs().put("relation", "relation");
+        this.getOptionalArgs().put("action", "action");
+        this.getOptionalArgs().put("access", "access");
 
-        this.requirements = new CommandRequirements.Builder(Permission.PERMISSIONS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.PERMISSIONS)
                 .playerOnly()
                 .memberOnly()
                 .withRole(Role.LEADER)
-                .build();
+                .build());
     }
 
     @Override

@@ -24,15 +24,15 @@ public class CmdAutoClaim extends FCommand {
 
     public CmdAutoClaim() {
         super();
-        this.aliases.addAll(Aliases.claim_auto);
+        this.getAliases().addAll(Aliases.claim_auto);
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("faction", "your");
+        this.getOptionalArgs().put("faction", "your");
 
-        this.requirements = new CommandRequirements.Builder(Permission.AUTOCLAIM)
+        this.setRequirements(new CommandRequirements.Builder(Permission.AUTOCLAIM)
                 .playerOnly()
                 .withAction(PermissableAction.TERRITORY)
-                .build();
+                .build());
     }
 
     @Override

@@ -13,14 +13,14 @@ public class CmdSethome extends FCommand {
      */
 
     public CmdSethome() {
-        this.aliases.addAll(Aliases.setHome);
-        this.optionalArgs.put("faction tag", "mine");
+        this.getAliases().addAll(Aliases.setHome);
+        this.getOptionalArgs().put("faction tag", "mine");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETHOME)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETHOME)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.SETHOME)
-                .build();
+                .build());
     }
 
     @Override

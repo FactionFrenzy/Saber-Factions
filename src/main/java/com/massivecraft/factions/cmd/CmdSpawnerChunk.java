@@ -14,14 +14,14 @@ public class CmdSpawnerChunk extends FCommand {
 
     public CmdSpawnerChunk() {
         super();
-        this.aliases.addAll(Aliases.spawnerChunks);
+        this.getAliases().addAll(Aliases.spawnerChunks);
 
-        this.requirements = new CommandRequirements.Builder(Permission.SPAWNER_CHUNKS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SPAWNER_CHUNKS)
                 .withAction(PermissableAction.TERRITORY)
                 .withRole(Role.COLEADER)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

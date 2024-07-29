@@ -18,15 +18,15 @@ public class CmdAudit extends FCommand {
 
     public CmdAudit() {
         super();
-        this.aliases.addAll(Aliases.audit);
+        this.getAliases().addAll(Aliases.audit);
 
 
-        this.requirements = new CommandRequirements.Builder(Permission.AUDIT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.AUDIT)
                 .withAction(PermissableAction.AUDIT)
                 .playerOnly()
                 .memberOnly()
                 .noErrorOnManyArgs()
-                .build();
+                .build());
     }
 
     @Override

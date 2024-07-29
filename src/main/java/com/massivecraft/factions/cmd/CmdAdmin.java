@@ -20,11 +20,11 @@ public class CmdAdmin extends FCommand {
 
     public CmdAdmin() {
         super();
-        this.aliases.addAll(Aliases.admin);
+        this.getAliases().addAll(Aliases.admin);
 
-        this.requiredArgs.add("player");
+        this.getRequiredArgs().add("player");
 
-        this.requirements = new CommandRequirements.Builder(Permission.ADMIN).build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.ADMIN).build());
     }
 
     @Override

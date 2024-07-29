@@ -17,14 +17,14 @@ public class CmdOpen extends FCommand {
 
     public CmdOpen() {
         super();
-        this.aliases.addAll(Aliases.open);
-        this.optionalArgs.put("yes/no", "flip");
+        this.getAliases().addAll(Aliases.open);
+        this.getOptionalArgs().put("yes/no", "flip");
 
-        this.requirements = new CommandRequirements.Builder(Permission.OPEN)
+        this.setRequirements(new CommandRequirements.Builder(Permission.OPEN)
                 .withRole(Role.COLEADER)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

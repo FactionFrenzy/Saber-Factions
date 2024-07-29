@@ -13,13 +13,13 @@ public class CmdViewChest extends FCommand {
 
     public CmdViewChest() {
         super();
-        this.aliases.addAll(Aliases.viewChest);
+        this.getAliases().addAll(Aliases.viewChest);
 
-        this.requiredArgs.add("faction name");
+        this.getRequiredArgs().add("faction name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.VIEWCHEST)
+        this.setRequirements(new CommandRequirements.Builder(Permission.VIEWCHEST)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

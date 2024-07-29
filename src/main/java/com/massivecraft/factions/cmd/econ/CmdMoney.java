@@ -23,12 +23,12 @@ public class CmdMoney extends FCommand {
 
     public CmdMoney() {
         super();
-        this.aliases.addAll(Aliases.money_money);
+        this.getAliases().addAll(Aliases.money_money);
 
         //this.requiredArgs.add("");
         //this.optionalArgs.put("","")
 
-        this.helpLong.add(TextUtil.parseTags(TL.COMMAND_MONEY_LONG.toString()));
+        this.getHelpLong().add(TextUtil.parseTags(TL.COMMAND_MONEY_LONG.toString()));
 
         this.addSubCommand(this.cmdMoneyBalance);
         this.addSubCommand(this.cmdMoneyDeposit);

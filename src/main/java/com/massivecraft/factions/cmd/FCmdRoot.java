@@ -15,6 +15,7 @@ import com.massivecraft.factions.cmd.relational.*;
 import com.massivecraft.factions.cmd.reserve.CmdReserve;
 import com.massivecraft.factions.cmd.roles.CmdDemote;
 import com.massivecraft.factions.cmd.roles.CmdPromote;
+import com.massivecraft.factions.cmd.roster.CmdRoster;
 import com.massivecraft.factions.cmd.tnt.CmdSetTnt;
 import com.massivecraft.factions.cmd.tnt.CmdTnt;
 import com.massivecraft.factions.cmd.tnt.CmdTntFill;
@@ -167,6 +168,7 @@ public class FCmdRoot extends FCommand implements CommandExecutor {
     public CmdJoin cmdJoin = new CmdJoin();
     public CmdKick cmdKick = new CmdKick();
     public CmdAllyFWarp cmdAllyFWarp = new CmdAllyFWarp();
+    public CmdRoster cmdRoster = new CmdRoster();
 
 
     //Variables to know if we already set up certain sub commands
@@ -194,11 +196,11 @@ public class FCmdRoot extends FCommand implements CommandExecutor {
         if (CommodoreProvider.isSupported()) brigadierManager = new BrigadierManager();
 
 
-        this.aliases.addAll(Conf.baseCommandAliases);
-        this.aliases.removeAll(Collections.<String>singletonList(null));
+        this.getAliases().addAll(Conf.baseCommandAliases);
+        this.getAliases().removeAll(Collections.<String>singletonList(null));
 
         this.setHelpShort("The faction base command");
-        this.helpLong.add(TextUtil.parseTags("<i>This command contains all faction stuff."));
+        this.getHelpLong().add(TextUtil.parseTags("<i>This command contains all faction stuff."));
 
         this.addSubCommand(this.cmdAllyFWarp);
         this.addSubCommand(this.cmdAdmin);
@@ -318,11 +320,15 @@ public class FCmdRoot extends FCommand implements CommandExecutor {
      */
     public void addVariableCommands() {
 
+        if(FactionsPlugin.getInstance().getFileManager().getRoster().fetchBoolean("use-roster-system")) {
+            this.addSubCommand(this.cmdRoster);
+        }
+
         Bukkit.getScheduler().runTaskLater(FactionsPlugin.getInstance(), () -> {
             if(FactionsPlugin.getInstance().getFactionsAddonHashMap().containsKey("Roster")) {
-                this.subCommands.remove(this.cmdInvite);
-                this.subCommands.remove(this.cmdJoin);
-                this.subCommands.remove(this.cmdKick);
+                this.getSubCommands().remove(this.cmdInvite);
+                this.getSubCommands().remove(this.cmdJoin);
+                this.getSubCommands().remove(this.cmdKick);
             }
         }, 200);
 

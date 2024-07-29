@@ -12,14 +12,14 @@ public class CmdBypass extends FCommand {
 
     public CmdBypass() {
         super();
-        this.aliases.addAll(Aliases.bypass);
+        this.getAliases().addAll(Aliases.bypass);
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("on/off", "flip");
+        this.getOptionalArgs().put("on/off", "flip");
 
-        this.requirements = new CommandRequirements.Builder(Permission.BYPASS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.BYPASS)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

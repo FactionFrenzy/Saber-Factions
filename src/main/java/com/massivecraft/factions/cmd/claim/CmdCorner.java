@@ -22,14 +22,14 @@ public class CmdCorner extends FCommand {
      */
 
     public CmdCorner() {
-        this.aliases.addAll(Aliases.claim_corner);
+        this.getAliases().addAll(Aliases.claim_corner);
 
 
-        this.requirements = new CommandRequirements.Builder(Permission.CORNER)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CORNER)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.TERRITORY)
-                .build();
+                .build());
     }
 
     @Override

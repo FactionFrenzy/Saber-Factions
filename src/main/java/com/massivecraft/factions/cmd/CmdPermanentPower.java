@@ -13,12 +13,12 @@ public class CmdPermanentPower extends FCommand {
 
     public CmdPermanentPower() {
         super();
-        this.aliases.addAll(Aliases.permanent_power);
-        this.requiredArgs.add("faction");
-        this.requiredArgs.add("power");
+        this.getAliases().addAll(Aliases.permanent_power);
+        this.getRequiredArgs().add("faction");
+        this.getRequiredArgs().add("power");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SET_PERMANENTPOWER)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.SET_PERMANENTPOWER)
+                .build());
     }
 
     @Override

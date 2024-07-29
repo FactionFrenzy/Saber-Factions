@@ -14,15 +14,15 @@ public class CmdSetDiscord extends FCommand {
 
     public CmdSetDiscord() {
         super();
-        this.aliases.addAll(Aliases.discord_set);
+        this.getAliases().addAll(Aliases.discord_set);
 
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requiredArgs.add("link");
-        this.requirements = new CommandRequirements.Builder(Permission.SETDISCORD)
+        this.getRequiredArgs().add("link");
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETDISCORD)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

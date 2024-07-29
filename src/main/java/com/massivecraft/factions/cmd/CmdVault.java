@@ -18,13 +18,13 @@ public class CmdVault extends FCommand {
      */
 
     public CmdVault() {
-        this.aliases.addAll(Aliases.vault);
+        this.getAliases().addAll(Aliases.vault);
 
-        this.requirements = new CommandRequirements.Builder(Permission.VAULT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.VAULT)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.VAULT)
-                .build();
+                .build());
 
     }
 

@@ -22,16 +22,16 @@ import java.util.UUID;
 public class CmdAllyFWarp extends FCommand {
 
     public CmdAllyFWarp() {
-        this.requiredArgs.add("faction name");
-        this.optionalArgs.put("warpname", "warpname");
-        this.optionalArgs.put("password", "password");
+        this.getRequiredArgs().add("faction name");
+        this.getOptionalArgs().put("warpname", "warpname");
+        this.getOptionalArgs().put("password", "password");
 
-        this.aliases.addAll(Aliases.allyfwarp);
+        this.getAliases().addAll(Aliases.allyfwarp);
 
-        this.requirements = new CommandRequirements.Builder(Permission.WARP)
+        this.setRequirements(new CommandRequirements.Builder(Permission.WARP)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

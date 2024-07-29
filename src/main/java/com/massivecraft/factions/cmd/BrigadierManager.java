@@ -1,5 +1,6 @@
 package com.massivecraft.factions.cmd;
 
+import com.massivecraft.factions.Conf;
 import com.massivecraft.factions.FactionsPlugin;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
@@ -85,13 +86,13 @@ public class BrigadierManager {
     }
 
     private List<RequiredArgumentBuilder<Object, ?>> generateArgsStack(FCommand subCommand) {
-        List<RequiredArgumentBuilder<Object, ?>> stack = new ArrayList<>(subCommand.requiredArgs.size() + subCommand.optionalArgs.size());
+        List<RequiredArgumentBuilder<Object, ?>> stack = new ArrayList<>(subCommand.getRequiredArgs().size() + subCommand.getOptionalArgs().size());
 
-        for (String required : subCommand.requiredArgs) {
+        for (String required : subCommand.getRequiredArgs()) {
             stack.add(RequiredArgumentBuilder.argument(required, StringArgumentType.word()));
         }
 
-        for (Map.Entry<String, String> optionalEntry : subCommand.optionalArgs.entrySet()) {
+        for (Map.Entry<String, String> optionalEntry : subCommand.getOptionalArgs().entrySet()) {
             RequiredArgumentBuilder<Object, ?> optional;
             if (optionalEntry.getKey().equalsIgnoreCase(optionalEntry.getValue())) {
                 optional = RequiredArgumentBuilder.argument(":" + optionalEntry.getKey(), StringArgumentType.word());

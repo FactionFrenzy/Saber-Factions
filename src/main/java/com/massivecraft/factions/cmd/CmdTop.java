@@ -39,12 +39,12 @@ public class CmdTop extends FCommand {
 
     public CmdTop() {
         super();
-        this.aliases.addAll(Aliases.top);
-        this.requiredArgs.add("criteria");
-        this.optionalArgs.put("page", "1");
+        this.getAliases().addAll(Aliases.top);
+        this.getRequiredArgs().add("criteria");
+        this.getOptionalArgs().put("page", "1");
 
-        this.requirements = new CommandRequirements.Builder(Permission.TOP)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.TOP)
+                .build());
     }
 
 

@@ -7,12 +7,12 @@ public class CmdRally extends FCommand {
 
     public CmdRally() {
         super();
-        this.aliases.addAll(Aliases.rally);
+        this.getAliases().addAll(Aliases.rally);
 
-        this.requirements = new CommandRequirements.Builder(Permission.RALLY)
+        this.setRequirements(new CommandRequirements.Builder(Permission.RALLY)
                 .memberOnly()
                 .playerOnly()
-                .build();
+                .build());
     }
 
 

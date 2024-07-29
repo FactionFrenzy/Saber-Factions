@@ -18,16 +18,16 @@ public class CmdStrikes extends FCommand {
     public CmdStrikes() {
         super();
 
-        this.aliases.addAll(Aliases.strikes_strikes);
+        this.getAliases().addAll(Aliases.strikes_strikes);
 
         this.addSubCommand(cmdStrikesGive);
         this.addSubCommand(cmdStrikesInfo);
         this.addSubCommand(cmdStrikesSet);
         this.addSubCommand(cmdStrikesTake);
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETSTRIKES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETSTRIKES)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

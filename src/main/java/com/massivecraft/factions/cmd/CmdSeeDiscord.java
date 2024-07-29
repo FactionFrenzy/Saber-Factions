@@ -12,13 +12,13 @@ public class CmdSeeDiscord extends FCommand {
      */
 
     public CmdSeeDiscord() {
-        this.aliases.addAll(Aliases.discord_see);
+        this.getAliases().addAll(Aliases.discord_see);
 
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.DISCORD)
+        this.setRequirements(new CommandRequirements.Builder(Permission.DISCORD)
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

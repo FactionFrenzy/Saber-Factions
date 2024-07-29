@@ -21,11 +21,11 @@ public class CmdWarunclaimall extends FCommand {
      */
 
     public CmdWarunclaimall() {
-        this.aliases.addAll(Aliases.unclaim_all_war);
-        this.optionalArgs.put("world", "all");
+        this.getAliases().addAll(Aliases.unclaim_all_war);
+        this.getOptionalArgs().put("world", "all");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MANAGE_WAR_ZONE)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.MANAGE_WAR_ZONE)
+                .build());
     }
 
     @Override

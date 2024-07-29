@@ -12,11 +12,11 @@ public class CmdInspect extends FCommand {
 
     public CmdInspect() {
         super();
-        this.aliases.addAll(Aliases.inspect);
-        this.requirements = new CommandRequirements.Builder(Permission.INSPECT)
+        this.getAliases().addAll(Aliases.inspect);
+        this.setRequirements(new CommandRequirements.Builder(Permission.INSPECT)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
 

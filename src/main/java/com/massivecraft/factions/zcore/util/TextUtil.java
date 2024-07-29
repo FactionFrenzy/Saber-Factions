@@ -129,16 +129,6 @@ public final class TextUtil {
     public static BukkitAudiences AUDIENCES;
 
     public static void init() {
-        Optional<Map<String, String>> optionalTags = FactionsPlugin.getInstance().persist.load(new TypeToken<Map<String, String>>(){}.getType(), "tags");
-
-        if (optionalTags.isPresent()) {
-            Map<String, String> tagsFromFile = optionalTags.get();
-            RAW_TAGS.clear();
-            RAW_TAGS.putAll(tagsFromFile);
-        }
-
-        FactionsPlugin.getInstance().persist.save(RAW_TAGS, "tags");
-
         for (Map.Entry<String, String> rawTag : RAW_TAGS.entrySet()) {
             TAGS.put(rawTag.getKey(), TextUtil.parseColor(rawTag.getValue()));
         }

@@ -28,14 +28,14 @@ public class CmdKickAlt extends FCommand {
 
     public CmdKickAlt() {
         super();
-        this.aliases.addAll(Aliases.alts_kick);
-        this.requiredArgs.add("player name");
+        this.getAliases().addAll(Aliases.alts_kick);
+        this.getRequiredArgs().add("player name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.KICK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.KICK)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.KICK)
-                .build();
+                .build());
     }
 
     @Override

@@ -22,17 +22,17 @@ public class CmdClaimAt extends FCommand {
 
     public CmdClaimAt() {
         super();
-        this.aliases.addAll(Aliases.claim_at);
+        this.getAliases().addAll(Aliases.claim_at);
 
-        this.requiredArgs.add("world");
-        this.requiredArgs.add("x");
-        this.requiredArgs.add("z");
+        this.getRequiredArgs().add("world");
+        this.getRequiredArgs().add("x");
+        this.getRequiredArgs().add("z");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CLAIMAT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CLAIMAT)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.TERRITORY)
-                .build();
+                .build());
     }
 
     @Override

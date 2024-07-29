@@ -12,12 +12,12 @@ public class CmdStrikesInfo extends FCommand {
 
     public CmdStrikesInfo() {
         super();
-        this.aliases.addAll(Aliases.strikes_info);
-        this.optionalArgs.put("target", "faction");
+        this.getAliases().addAll(Aliases.strikes_info);
+        this.getOptionalArgs().put("target", "faction");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETSTRIKES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETSTRIKES)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

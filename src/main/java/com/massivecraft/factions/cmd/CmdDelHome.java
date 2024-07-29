@@ -14,12 +14,12 @@ import com.massivecraft.factions.zcore.util.TL;
 public class CmdDelHome extends FCommand {
 
     public CmdDelHome() {
-        this.aliases.addAll(Aliases.delfHome);
+        this.getAliases().addAll(Aliases.delfHome);
 
-        this.requirements = new CommandRequirements.Builder(Permission.DELHOME)
+        this.setRequirements(new CommandRequirements.Builder(Permission.DELHOME)
                 .memberOnly()
                 .withAction(PermissableAction.SETHOME)
-                .build();
+                .build());
     }
 
 

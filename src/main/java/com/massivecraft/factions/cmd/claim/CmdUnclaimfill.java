@@ -27,16 +27,16 @@ public class CmdUnclaimfill extends FCommand {
     public CmdUnclaimfill() {
 
         // Aliases
-        this.aliases.add("unclaimfill");
-        this.aliases.add("ucf");
+        this.getAliases().add("unclaimfill");
+        this.getAliases().add("ucf");
 
         // Args
-        this.optionalArgs.put("limit", String.valueOf(Conf.maxFillClaimCount));
-        this.optionalArgs.put("faction", "you");
+        this.getOptionalArgs().put("limit", String.valueOf(Conf.maxFillClaimCount));
+        this.getOptionalArgs().put("faction", "you");
 
-        this.requirements = new CommandRequirements.Builder(Permission.UNCLAIM_FILL)
+        this.setRequirements(new CommandRequirements.Builder(Permission.UNCLAIM_FILL)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

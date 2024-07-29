@@ -192,7 +192,7 @@ public enum TL {
     COMMAND_ALTKICK_NOTMEMBER("&c&l[!] &7This player is not a member of your faction."),
 
     COMMAND_ALTS_LIST_NOALTS("&c&l[!] &7%s does not have any alts in their faction!"),
-    COMMAND_AUTOHELP_HELPFOR("Help for command"),
+    COMMAND_AUTOHELP_HECOMMAND_LEAVE_LEADER_MESSAGELPFOR("Help for command"),
     COMMAND_HOME_OTHER_NOTSET("&c&l[!] &7%s does not have their faction home set!"),
     COMMAND_HOME_TELEPORT_OTHER("&c&l[!] &7You have teleported to %s's faction home!"),
     COMMAND_SHOP_DESCRIPTION("opens shop gui"),
@@ -567,6 +567,12 @@ public enum TL {
     COMMAND_JOIN_DESCRIPTION("&a&l» &7Join a faction"),
     COMMAND_JOIN_BANNED("&c&l[!]&7 You are &cbanned &7from &c%1$s."),
     COMMAND_JOIN_NOT_IN_ROSTER("&c&l[!] &7You cannot join this faction, you're not on their roster!"),
+    COMMAND_JOIN_ROSTER_JOIN_COOLDOWN("&c&l[!] &7You are currently on cooldown from joining this faction!"),
+    COMMAND_JOIN_ROSTER_JOIN_NO_ROOM_ONLINE("&c&l[!] &7All of the players in this faction are online!"),
+    COMMAND_JOIN_ROSTER_JOIN_NO_ROOM_FULL("&c&l[!] &7This faction is currently full of players!"),
+    COMMAND_JOIN_ROSTER_JOIN_NO_REPLACEMENT_FOUND("&c&l[!] &7There was no valid replacement found in this faction!"),
+
+
 
     COMMAND_KICK_CANDIDATES("&c&l[!]&7 Players you can kick: "),
     COMMAND_KICK_CLICKTOKICK("Click to kick "),
@@ -843,6 +849,26 @@ public enum TL {
     COMMAND_RESERVE_DESCRIPTION("Reserve any faction name for any player"),
     COMMAND_RESERVE_SUCCESS("&a&l[!] &7You have reserved the faction &a%1$s &7for player &a%2$s"),
     COMMAND_RESERVE_ALREADYRESERVED("&c&l[!] &7The faction &b%1$s &7has already been reserved!"),
+
+    COMMAND_ROSTERADD_INVALIDROLE("&c&l[!] &7Please enter a valid role: &ecoleader, mod, member, recruit"),
+    COMMAND_ROSTERADD_ALREADY_MEMBER("&c&l[!] &7This player is already in your roster!"),
+    COMMAND_ROSTERADD_FULL("&c&l[!] &7Your roster is currently full!"),
+    COMMAND_ROSTERADD_NOT_FOUND("&c&l[!] &7That player cannot be found!"),
+    COMMAND_ROSTERADD_PLAYER_ADDED("&a&l[!] &7You have added &e%1$s &7to your roster with the role &a%2$s&7!"),
+    COMMAND_ROSTERADD_CANNOT_ADD_SELF("&a&l[!] &7You cannot add yourself to the roster!"),
+    COMMAND_ROSTERADD_DESCRIPTION("Add users to your roster"),
+
+
+    COMMAND_ROSTERREMOVE_NOT_FOUND("&c&l[!] &7That player cannot be found!"),
+    COMMAND_ROSTERREMOVE_NOT_IN_ROSTER("&c&l[!] &7That player is not in your factions roster!"),
+    COMMAND_ROSTERREMOVE_CANNOT_REMOVE_SELF("&a&l[!] &7You cannot remove yourself from the roster!"),
+    COMMAND_ROSTEREMOVE_PLAYER_REMOVED("&a&l[!] &7You have removed &e%1$s &7from your roster!"),
+    COMMAND_ROSTERREMOVE_DESCRIPTION("Remove users from your roster"),
+
+    COMMAND_ROSTERREMOVE_MAX_KICKS_REACHED("&c&l[!] &7Your faction has reached the maximum amount of roster kicks! &e%1$d&f/&e%2$d"),
+
+    COMMAND_ROSTER_DESCRIPTION("General roster usage for your faction"),
+
 
 
     COMMAND_SAFEUNCLAIMALL_DESCRIPTION("Unclaim all safezone land"),
@@ -1241,25 +1267,6 @@ public enum TL {
     NO_BALANCE_PLACEHOLDER_PARSED("no balance"),
 
     ROLE_LIST("&eTry using &arecruit, normal, moderator, coleader"),
-
-
-    COMMAND_ROSTER_DESCRIPTION("manage your roster"),
-    COMMAND_ROSTER_GRACE("&c&l[!] &7You may not edit your faction roster whilst grace period is disabled!"),
-    COMMAND_ROSTER_ADD_LIMIT("&c&l[!] &7You may not add more people to your roster. &b%1$s&7/&b%2$s &7Roster Players"),
-
-    COMMAND_ROSTERADD_NEED_ROLE("&c[!] &7You need to enter a role"),
-    COMMAND_ROSTERADD_COLEADER("&c[!] &7You cannot set them as a leader try coleader"),
-    COMMAND_ROSTERADD_DESCRIPTION("add users to your roster"),
-
-    COMMAND_ROSTERMANGE_KICKUSAGE("&cSet a factions roster kicks"),
-
-    COMMAND_ROSTERKICK_NOTMEMBER("&c&l[!] &7This player is not in your factions roster"),
-    COMMAND_ROSTERKICK_DESCRIPTION("Kick roster members from your faction"),
-    COMMAND_ROSTERKICK_NOTALT("&c&l[!] &7Player is not on your roster"),
-    COMMAND_ROSTERREMOVE_NOTENOUGH_KICKS("&cYou have no more roster kicks avaiable"),
-
-    COMMAND_ROSTER_GUI_KICK("&a&l[!] &7You have removed &b%1$s &7from your faction roster."),
-
 
     // MISSION_CREATED_COOLDOWN("&c&l[!] &7Due to your immediate faction creation, you may not start missions for &b%1$s minutes&7!"),
     MISSION_MISSION_STARTED("&f%1$s &dstarted the %2$s &fmission"),

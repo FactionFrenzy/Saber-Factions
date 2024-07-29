@@ -17,12 +17,12 @@ public class CmdPointsBalance extends FCommand {
 
     public CmdPointsBalance() {
         super();
-        this.aliases.addAll(Aliases.points_balance);
+        this.getAliases().addAll(Aliases.points_balance);
 
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.POINTS)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.POINTS)
+                .build());
     }
 
 

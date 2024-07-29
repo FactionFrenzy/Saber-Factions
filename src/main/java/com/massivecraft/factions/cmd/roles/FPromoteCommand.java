@@ -21,13 +21,13 @@ public class FPromoteCommand extends FCommand {
 
     public FPromoteCommand() {
         super();
-        this.requiredArgs.add("player");
+        this.getRequiredArgs().add("player");
 
-        this.requirements = new CommandRequirements.Builder(Permission.PROMOTE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.PROMOTE)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.PROMOTE)
-                .build();
+                .build());
     }
 
     @Override

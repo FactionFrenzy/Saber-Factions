@@ -21,14 +21,14 @@ public class CmdInvite extends FCommand {
 
     public CmdInvite() {
         super();
-        this.aliases.addAll(Aliases.invite);
+        this.getAliases().addAll(Aliases.invite);
 
-        this.requiredArgs.add("player name");
+        this.getRequiredArgs().add("player name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.INVITE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.INVITE)
                 .playerOnly()
                 .withAction(PermissableAction.INVITE)
-                .build();
+                .build());
     }
 
     @Override

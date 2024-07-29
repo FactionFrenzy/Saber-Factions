@@ -19,15 +19,15 @@ public class CmdUnclaim extends FCommand {
      */
 
     public CmdUnclaim() {
-        this.aliases.addAll(Aliases.unclaim_unclaim);
+        this.getAliases().addAll(Aliases.unclaim_unclaim);
 
-        this.optionalArgs.put("radius", "1");
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("radius", "1");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.UNCLAIM)
+        this.setRequirements(new CommandRequirements.Builder(Permission.UNCLAIM)
                 .playerOnly()
                 .withAction(PermissableAction.TERRITORY)
-                .build();
+                .build());
     }
 
     @Override

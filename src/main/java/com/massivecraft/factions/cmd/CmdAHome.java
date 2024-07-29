@@ -14,11 +14,11 @@ public class CmdAHome extends FCommand {
 
     public CmdAHome() {
         super();
-        this.aliases.addAll(Aliases.ahome);
+        this.getAliases().addAll(Aliases.ahome);
 
-        this.requiredArgs.add("player");
+        this.getRequiredArgs().add("player");
 
-        this.requirements = new CommandRequirements.Builder(Permission.AHOME).noDisableOnLock().build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.AHOME).noDisableOnLock().build());
     }
 
 

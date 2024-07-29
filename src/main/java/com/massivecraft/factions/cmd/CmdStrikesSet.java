@@ -12,13 +12,13 @@ public class CmdStrikesSet extends FCommand {
 
     public CmdStrikesSet() {
         super();
-        this.aliases.addAll(Aliases.strikes_set);
-        this.requiredArgs.add(0, "faction");
-        this.requiredArgs.add(1, "amount");
+        this.getAliases().addAll(Aliases.strikes_set);
+        this.getRequiredArgs().add(0, "faction");
+        this.getRequiredArgs().add(1, "amount");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETSTRIKES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETSTRIKES)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

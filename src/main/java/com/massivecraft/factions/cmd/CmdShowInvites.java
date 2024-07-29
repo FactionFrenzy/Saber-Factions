@@ -18,12 +18,12 @@ public class CmdShowInvites extends FCommand {
 
     public CmdShowInvites() {
         super();
-        aliases.addAll(Aliases.show_invites);
+        this.getAliases().addAll(Aliases.show_invites);
 
-        this.requirements = new CommandRequirements.Builder(Permission.SHOW_INVITES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SHOW_INVITES)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
 
     }
 

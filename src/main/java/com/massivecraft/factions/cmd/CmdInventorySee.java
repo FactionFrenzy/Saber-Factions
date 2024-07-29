@@ -27,13 +27,13 @@ public class CmdInventorySee extends FCommand {
     public CmdInventorySee() {
         super();
 
-        this.aliases.addAll(Aliases.invsee);
+        this.getAliases().addAll(Aliases.invsee);
 
-        this.requiredArgs.add("member name");
+        this.getRequiredArgs().add("member name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.INVSEE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.INVSEE)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

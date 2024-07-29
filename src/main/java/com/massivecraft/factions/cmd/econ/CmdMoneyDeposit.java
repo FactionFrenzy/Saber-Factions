@@ -23,14 +23,14 @@ public class CmdMoneyDeposit extends FCommand {
 
     public CmdMoneyDeposit() {
         super();
-        this.aliases.addAll(Aliases.money_deposit);
+        this.getAliases().addAll(Aliases.money_deposit);
 
-        this.requiredArgs.add("amount");
-        this.optionalArgs.put("faction", "yours");
+        this.getRequiredArgs().add("amount");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MONEY_DEPOSIT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.MONEY_DEPOSIT)
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

@@ -12,12 +12,12 @@ public class CmdToggleAllianceChat extends FCommand {
 
     public CmdToggleAllianceChat() {
         super();
-        this.aliases.addAll(Aliases.toggleAllianceChat);
+        this.getAliases().addAll(Aliases.toggleAllianceChat);
 
-        this.requirements = new CommandRequirements.Builder(Permission.TOGGLE_ALLIANCE_CHAT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.TOGGLE_ALLIANCE_CHAT)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

@@ -24,12 +24,12 @@ public class CmdFly extends FCommand {
 
     public CmdFly() {
         super();
-        this.aliases.addAll(Aliases.fly);
-        this.optionalArgs.put("on/off/auto", "flip");
+        this.getAliases().addAll(Aliases.fly);
+        this.getOptionalArgs().put("on/off/auto", "flip");
 
-        this.requirements = new CommandRequirements.Builder(Permission.FLY_FLY)
+        this.setRequirements(new CommandRequirements.Builder(Permission.FLY_FLY)
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

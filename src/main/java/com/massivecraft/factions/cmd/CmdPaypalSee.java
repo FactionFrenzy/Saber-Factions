@@ -12,13 +12,13 @@ public class CmdPaypalSee extends FCommand {
      */
 
     public CmdPaypalSee() {
-        this.aliases.addAll(Aliases.paypal_see);
+        this.getAliases().addAll(Aliases.paypal_see);
 
-        this.optionalArgs.put("faction", "yours");
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.PAYPAL)
+        this.setRequirements(new CommandRequirements.Builder(Permission.PAYPAL)
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

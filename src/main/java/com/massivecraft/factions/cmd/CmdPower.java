@@ -13,11 +13,11 @@ public class CmdPower extends FCommand {
 
     public CmdPower() {
         super();
-        this.aliases.addAll(Aliases.power_power);
-        this.optionalArgs.put("player name", "you");
+        this.getAliases().addAll(Aliases.power_power);
+        this.getOptionalArgs().put("player name", "you");
 
-        this.requirements = new CommandRequirements.Builder(Permission.POWER)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.POWER)
+                .build());
 
     }
 

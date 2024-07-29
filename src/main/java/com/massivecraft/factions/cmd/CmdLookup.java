@@ -18,12 +18,12 @@ public class CmdLookup extends FCommand {
 
     public CmdLookup() {
         super();
-        this.aliases.addAll(Aliases.lookup);
-        this.requiredArgs.add("faction name");
+        this.getAliases().addAll(Aliases.lookup);
+        this.getRequiredArgs().add("faction name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.LOOKUP)
+        this.setRequirements(new CommandRequirements.Builder(Permission.LOOKUP)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

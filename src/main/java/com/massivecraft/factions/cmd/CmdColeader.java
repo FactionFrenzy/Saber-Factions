@@ -21,14 +21,14 @@ public class CmdColeader extends FCommand {
 
     public CmdColeader() {
         super();
-        this.aliases.addAll(Aliases.coleader);
+        this.getAliases().addAll(Aliases.coleader);
 
-        this.requiredArgs.add("name");
+        this.getRequiredArgs().add("name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.COLEADER)
+        this.setRequirements(new CommandRequirements.Builder(Permission.COLEADER)
                 .memberOnly()
                 .withRole(Role.LEADER)
-                .build();
+                .build());
     }
 
     @Override

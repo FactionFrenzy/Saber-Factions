@@ -14,15 +14,15 @@ public class CmdTitle extends FCommand {
      */
 
     public CmdTitle() {
-        this.aliases.addAll(Aliases.title);
-        this.requiredArgs.add("player name");
-        this.optionalArgs.put("title", "");
+        this.getAliases().addAll(Aliases.title);
+        this.getRequiredArgs().add("player name");
+        this.getOptionalArgs().put("title", "");
 
-        this.requirements = new CommandRequirements.Builder(Permission.TITLE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.TITLE)
                 .memberOnly()
                 .withRole(Role.MODERATOR)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

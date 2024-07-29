@@ -13,13 +13,13 @@ public class CmdModifyPower extends FCommand {
     public CmdModifyPower() {
         super();
 
-        this.aliases.addAll(Aliases.modifyPower);
+        this.getAliases().addAll(Aliases.modifyPower);
 
-        this.requiredArgs.add("name");
-        this.requiredArgs.add("power");
+        this.getRequiredArgs().add("name");
+        this.getRequiredArgs().add("power");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MODIFY_POWER)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.MODIFY_POWER)
+                .build());
     }
 
     @Override

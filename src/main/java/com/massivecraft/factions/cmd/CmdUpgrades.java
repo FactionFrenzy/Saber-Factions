@@ -13,12 +13,12 @@ public class CmdUpgrades extends FCommand {
 
     public CmdUpgrades() {
         super();
-        this.aliases.addAll(Aliases.upgrades);
+        this.getAliases().addAll(Aliases.upgrades);
 
-        this.requirements = new CommandRequirements.Builder(Permission.UPGRADES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.UPGRADES)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

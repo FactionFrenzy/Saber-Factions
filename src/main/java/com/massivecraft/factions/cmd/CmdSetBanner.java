@@ -11,11 +11,11 @@ public class CmdSetBanner extends FCommand {
 
     public CmdSetBanner() {
         super();
-        aliases.addAll(Aliases.setBanner);
+        getAliases().addAll(Aliases.setBanner);
 
-        this.requirements = new CommandRequirements.Builder(Permission.BANNER)
+        this.setRequirements(new CommandRequirements.Builder(Permission.BANNER)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

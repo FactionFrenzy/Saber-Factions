@@ -21,11 +21,11 @@ public class CmdSafeunclaimall extends FCommand {
      */
 
     public CmdSafeunclaimall() {
-        this.aliases.addAll(Aliases.unclaim_all_safe);
-        this.optionalArgs.put("world", "all");
+        this.getAliases().addAll(Aliases.unclaim_all_safe);
+        this.getOptionalArgs().put("world", "all");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MANAGE_SAFE_ZONE)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.MANAGE_SAFE_ZONE)
+                .build());
     }
 
     @Override

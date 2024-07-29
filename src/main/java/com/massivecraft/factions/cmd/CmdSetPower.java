@@ -14,12 +14,12 @@ import org.bukkit.ChatColor;
 public class CmdSetPower extends FCommand {
 
     public CmdSetPower() {
-        this.aliases.addAll(Aliases.setPower);
-        this.requiredArgs.add("player");
-        this.requiredArgs.add("number");
+        this.getAliases().addAll(Aliases.setPower);
+        this.getRequiredArgs().add("player");
+        this.getRequiredArgs().add("number");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETPOWER)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETPOWER)
+                .build());
     }
 
     @Override
