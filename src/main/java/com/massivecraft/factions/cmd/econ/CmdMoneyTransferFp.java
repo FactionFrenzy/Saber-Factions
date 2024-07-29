@@ -19,13 +19,13 @@ public class CmdMoneyTransferFp extends FCommand {
      */
 
     public CmdMoneyTransferFp() {
-        this.aliases.addAll(Aliases.money_transfer_Fp);
+        this.getAliases().addAll(Aliases.money_transfer_Fp);
 
-        this.requiredArgs.add("amount");
-        this.requiredArgs.add("faction");
-        this.requiredArgs.add("player");
+        this.getRequiredArgs().add("amount");
+        this.getRequiredArgs().add("faction");
+        this.getRequiredArgs().add("player");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MONEY_F2P).build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.MONEY_F2P).build());
     }
 
     @Override

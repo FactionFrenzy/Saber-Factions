@@ -24,15 +24,15 @@ public class CmdTnt extends FCommand {
 
     public CmdTnt() {
         super();
-        this.aliases.addAll(Aliases.tnt_tnt);
-        this.optionalArgs.put("add/take/addall", "");
-        this.optionalArgs.put("amount", "number");
+        this.getAliases().addAll(Aliases.tnt_tnt);
+        this.getOptionalArgs().put("add/take/addall", "");
+        this.getOptionalArgs().put("amount", "number");
 
-        this.requirements = new CommandRequirements.Builder(Permission.TNT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.TNT)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.TNTBANK)
-                .build();
+                .build());
     }
 
     public static void removeItems(Inventory inventory, ItemStack item, int toRemove) {

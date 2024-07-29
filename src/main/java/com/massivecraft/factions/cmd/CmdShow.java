@@ -23,7 +23,7 @@ public class CmdShow extends FCommand {
     List<String> defaults = new ArrayList<>();
 
     public CmdShow() {
-        this.aliases.addAll(Aliases.show_show);
+        this.getAliases().addAll(Aliases.show_show);
 
         // add defaults to /f show in case config doesn't have it
         defaults.add("&8&m--------------&7 &8<&e{faction}&8> &8&m--------------");
@@ -43,10 +43,10 @@ public class CmdShow extends FCommand {
         defaults.add("&8&m----------------------------------------");
 
         // this.requiredArgs.add("");
-        this.optionalArgs.put("faction tag", "yours");
+        this.getOptionalArgs().put("faction tag", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SHOW)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.SHOW)
+                .build());
     }
 
     @Override

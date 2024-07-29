@@ -23,7 +23,7 @@ public class CmdList extends FCommand {
 
     public CmdList() {
         super();
-        this.aliases.addAll(Aliases.list);
+        this.getAliases().addAll(Aliases.list);
 
         // default values in case user has old config
         defaults[0] = "&e&m----------&r&e[ &2Faction List &9{pagenumber}&e/&9{pagecount} &e]&m----------";
@@ -31,11 +31,11 @@ public class CmdList extends FCommand {
         defaults[2] = "<a>{faction} <i>{online} / {members} online, <a>Land / Power / Maxpower: <i>{chunks}/{power}/{maxPower}";
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("page", "1");
+        this.getOptionalArgs().put("page", "1");
 
-        this.requirements = new CommandRequirements.Builder(Permission.LIST)
+        this.setRequirements(new CommandRequirements.Builder(Permission.LIST)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

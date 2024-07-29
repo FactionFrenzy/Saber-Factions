@@ -14,11 +14,11 @@ public class CmdConvert extends FCommand {
      */
 
     public CmdConvert() {
-        this.aliases.addAll(Aliases.convert);
-        this.requiredArgs.add("[MYSQL|JSON]");
+        this.getAliases().addAll(Aliases.convert);
+        this.getRequiredArgs().add("[MYSQL|JSON]");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CONVERT)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.CONVERT)
+                .build());
     }
 
     @Override

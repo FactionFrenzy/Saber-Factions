@@ -16,16 +16,16 @@ public class CmdChat extends FCommand {
 
     public CmdChat() {
         super();
-        this.aliases.addAll(Aliases.chat);
+        this.getAliases().addAll(Aliases.chat);
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("mode", "next");
+        this.getOptionalArgs().put("mode", "next");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CHAT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CHAT)
                 .playerOnly()
                 .memberOnly()
                 .brigadier(ChatBrigadier.class)
-                .build();
+                .build());
     }
 
     @Override

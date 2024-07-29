@@ -432,6 +432,9 @@ public class FactionsPlayerListener implements Listener {
         // and update their last login time to point to when the logged off, for auto-remove routine
         me.setLastLoginTime(System.currentTimeMillis());
 
+        //Purposeful for Roster Feature.
+        me.setLastLogoutTime(System.currentTimeMillis());
+
         me.logout(player.getStatistic(Statistic.PLAYER_KILLS), player.getStatistic(Statistic.DEATHS)); // cache kills / deaths
 
         CmdSeeChunk.seeChunkMap.remove(me.getPlayer().getName());

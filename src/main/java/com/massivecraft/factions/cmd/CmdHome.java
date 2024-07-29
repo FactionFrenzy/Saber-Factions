@@ -25,14 +25,14 @@ public class CmdHome extends FCommand {
 
     public CmdHome() {
         super();
-        this.aliases.addAll(Aliases.home);
-        this.optionalArgs.put("faction", "yours");
+        this.getAliases().addAll(Aliases.home);
+        this.getOptionalArgs().put("faction", "yours");
 
-        this.requirements = new CommandRequirements.Builder(Permission.HOME)
+        this.setRequirements(new CommandRequirements.Builder(Permission.HOME)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.HOME)
-                .build();
+                .build());
     }
 
     @Override

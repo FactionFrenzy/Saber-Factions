@@ -11,12 +11,12 @@ public class CmdLogins extends FCommand {
 
     public CmdLogins() {
         super();
-        this.aliases.addAll(Aliases.logins);
+        this.getAliases().addAll(Aliases.logins);
 
-        this.requirements = new CommandRequirements.Builder(Permission.MONITOR_LOGINS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.MONITOR_LOGINS)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

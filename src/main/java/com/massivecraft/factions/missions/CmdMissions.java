@@ -15,14 +15,14 @@ public class CmdMissions extends FCommand {
      */
 
     public CmdMissions() {
-        this.aliases.addAll(Aliases.missions_missions);
+        this.getAliases().addAll(Aliases.missions_missions);
 
-        this.requirements = new CommandRequirements.Builder(Permission.MISSIONS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.MISSIONS)
                 .memberOnly()
                 .playerOnly()
-                .build();
+                .build());
 
-        this.optionalArgs.put("tribute", "tribute");
+        this.getOptionalArgs().put("tribute", "tribute");
 
     }
 

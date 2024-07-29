@@ -12,14 +12,14 @@ public class CmdAutoUnclaim extends FCommand {
 
     public CmdAutoUnclaim() {
         super();
-        this.aliases.add("autounclaim");
+        this.getAliases().add("autounclaim");
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("faction", "your");
+        this.getOptionalArgs().put("faction", "your");
 
-        this.requirements = new CommandRequirements.Builder(Permission.AUTOCLAIM)
+        this.setRequirements(new CommandRequirements.Builder(Permission.AUTOCLAIM)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

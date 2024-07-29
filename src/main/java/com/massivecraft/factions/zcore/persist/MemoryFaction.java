@@ -1,6 +1,7 @@
 package com.massivecraft.factions.zcore.persist;
 
 import com.massivecraft.factions.*;
+import com.massivecraft.factions.cmd.roster.struct.RosterPlayer;
 import com.massivecraft.factions.event.FPlayerLeaveEvent;
 import com.massivecraft.factions.event.FactionDisbandEvent;
 import com.massivecraft.factions.event.FactionDisbandEvent.PlayerDisbandReason;
@@ -59,6 +60,7 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     protected Set<String> invites = new HashSet<>();
     protected Set<String> altinvites = new HashSet<>();
     protected HashMap<String, List<String>> announcements = new HashMap<>();
+    protected Set<RosterPlayer> roster = new HashSet<>();
     protected ConcurrentHashMap<String, LazyLocation> warps = new ConcurrentHashMap<>();
     protected ConcurrentHashMap<String, String> warpPasswords = new ConcurrentHashMap<>();
     protected int maxVaults;
@@ -72,6 +74,8 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     private long lastDeath;
     private int strikes = 0;
     private int points = 0;
+
+    private int rosterKicks = 0;
     private Map<String, Mission> missions = new ConcurrentHashMap<>();
     private int wallCheckMinutes;
     private int bufferCheckMinutes;
@@ -86,7 +90,6 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     private int allowedSpawnerChunks;
     private Set<FastChunk> spawnerChunks;
     private boolean protectedfac = true;
-    private boolean cloaked;
 
 
     // -------------------------------------------- //
@@ -113,13 +116,13 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
         this.wallCheckMinutes = 0;
         this.bufferCheckMinutes = 0;
         this.weeWoo = false;
+
         this.checks = new ConcurrentHashMap<>();
         this.playerWallCheckCount = new ConcurrentHashMap<>();
         this.playerBufferCheckCount = new ConcurrentHashMap<>();
         this.completedMissions = new ArrayList<>();
         allowedSpawnerChunks = Conf.allowedSpawnerChunks;
         spawnerChunks = new HashSet<>();
-        cloaked = false;
         resetPerms(); // Reset on new Faction so it has default values.
     }
 
@@ -144,12 +147,12 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
         fplayers = new HashSet<>();
         alts = new HashSet<>();
         invites = old.invites;
+        roster = old.roster;
         announcements = old.announcements;
         this.defaultRole = Role.NORMAL;
         this.wallCheckMinutes = 0;
         this.bufferCheckMinutes = 0;
         this.weeWoo = false;
-        this.cloaked = false;
         this.checks = new ConcurrentHashMap<>();
         allowedSpawnerChunks = Conf.allowedSpawnerChunks;
         spawnerChunks = new HashSet<>();
@@ -158,13 +161,9 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
         resetPerms(); // Reset on new Faction so it has default values.
     }
 
-
-    public boolean isFactionCloaked() {
-        return cloaked;
-    }
-
-    public void setIsFactionCloaked(boolean cloaked) {
-        this.cloaked = cloaked;
+    @Override
+    public Set<RosterPlayer> getRoster() {
+        return roster;
     }
 
     public boolean isProtected() {
@@ -197,6 +196,15 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
 
     public void setSpawnerChunks(Set<FastChunk> spawnerChunks) {
         this.spawnerChunks = spawnerChunks;
+    }
+
+
+    public int getRosterKicks() {
+        return rosterKicks;
+    }
+
+    public void setRosterKicks(int rosterKicks) {
+        this.rosterKicks = rosterKicks;
     }
 
     public int getPoints() {

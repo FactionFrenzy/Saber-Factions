@@ -11,11 +11,11 @@ public class CmdSB extends FCommand {
      */
 
     public CmdSB() {
-        this.aliases.addAll(Aliases.scoreboard);
+        this.getAliases().addAll(Aliases.scoreboard);
 
-        this.requirements = new CommandRequirements.Builder(Permission.SCOREBOARD)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SCOREBOARD)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

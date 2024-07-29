@@ -27,13 +27,13 @@ public abstract class FRelationCommand extends FCommand {
 
     public FRelationCommand() {
         super();
-        this.requiredArgs.add("faction tag");
+        this.getRequiredArgs().add("faction tag");
 
-        this.requirements = new CommandRequirements.Builder(Permission.RELATION)
+        this.setRequirements(new CommandRequirements.Builder(Permission.RELATION)
                 .withRole(Role.MODERATOR)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

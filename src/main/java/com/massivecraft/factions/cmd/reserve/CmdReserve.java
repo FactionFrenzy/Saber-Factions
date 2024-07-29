@@ -15,11 +15,11 @@ import com.massivecraft.factions.zcore.util.TL;
 public class CmdReserve extends FCommand {
 
     public CmdReserve() {
-        this.aliases.addAll(Aliases.reserve);
-        this.requiredArgs.add("tag");
-        this.requiredArgs.add("player");
-        this.requirements = new CommandRequirements.Builder(
-                Permission.RESERVE).build();
+        this.getAliases().addAll(Aliases.reserve);
+        this.getRequiredArgs().add("tag");
+        this.getRequiredArgs().add("player");
+        this.setRequirements(new CommandRequirements.Builder(
+                Permission.RESERVE).build());
     }
 
     @Override

@@ -13,12 +13,12 @@ public class CmdCoords extends FCommand {
 
     public CmdCoords() {
         super();
-        this.aliases.addAll(Aliases.coords);
+        this.getAliases().addAll(Aliases.coords);
 
-        this.requirements = new CommandRequirements.Builder(Permission.COORD)
+        this.setRequirements(new CommandRequirements.Builder(Permission.COORD)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

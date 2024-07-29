@@ -23,15 +23,15 @@ public class CmdClaim extends FCommand {
 
     public CmdClaim() {
         super();
-        this.aliases.addAll(Aliases.claim_claim);
+        this.getAliases().addAll(Aliases.claim_claim);
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("radius", "1");
-        this.optionalArgs.put("faction", "your");
+        this.getOptionalArgs().put("radius", "1");
+        this.getOptionalArgs().put("faction", "your");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CLAIM)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CLAIM)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

@@ -43,14 +43,14 @@ public class CmdSeeChunk extends FCommand {
         redstoneLamp = XMaterial.REDSTONE_LAMP.parseMaterial();
         blackStainedGlass = XMaterial.BLACK_STAINED_GLASS.parseMaterial();
 
-        aliases.addAll(Aliases.seeChunk);
+        getAliases().addAll(Aliases.seeChunk);
 
         //this.useParticles = FactionsPlugin.getInstance().getConfig().getBoolean("see-chunk.particles", true);
         interval = FactionsPlugin.getInstance().getConfig().getLong("see-chunk.interval", 10L);
 
-        this.requirements = new CommandRequirements.Builder(Permission.SEECHUNK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SEECHUNK)
                 .playerOnly()
-                .build();
+                .build());
 
     }
 

@@ -13,13 +13,13 @@ public class CmdSetDefaultRole extends FCommand {
     public CmdSetDefaultRole() {
         super();
 
-        this.aliases.addAll(Aliases.setDefaultRole);
-        this.requiredArgs.add("role");
+        this.getAliases().addAll(Aliases.setDefaultRole);
+        this.getRequiredArgs().add("role");
 
-        this.requirements = new CommandRequirements.Builder(Permission.DEFAULTRANK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.DEFAULTRANK)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

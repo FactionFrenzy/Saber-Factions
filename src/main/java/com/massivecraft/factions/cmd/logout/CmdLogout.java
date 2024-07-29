@@ -12,11 +12,11 @@ public class CmdLogout extends FCommand {
 
     public CmdLogout() {
         super();
-        this.aliases.addAll(Aliases.logout);
+        this.getAliases().addAll(Aliases.logout);
 
-        this.requirements = new CommandRequirements.Builder(Permission.LOGOUT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.LOGOUT)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

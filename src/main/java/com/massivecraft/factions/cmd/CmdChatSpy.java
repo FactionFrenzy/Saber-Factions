@@ -12,13 +12,13 @@ public class CmdChatSpy extends FCommand {
 
     public CmdChatSpy() {
         super();
-        this.aliases.addAll(Aliases.chatspy);
+        this.getAliases().addAll(Aliases.chatspy);
 
-        this.optionalArgs.put("on/off", "flip");
+        this.getOptionalArgs().put("on/off", "flip");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CHATSPY)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CHATSPY)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

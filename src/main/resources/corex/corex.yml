@@ -11,6 +11,7 @@
 
 Features:
   Anti-Boat-Placement: false #Denies Players From Placing Boats
+  Anti-Bow-Boosting: false #Denies Players From Bow Boosting Themselves
   Anti-Loot-Steal: true #Upon killing a player in PVP the loot is protected
   Anti-Minecart-Placement: false #Denies Players From Placing Minecarts
   Anti-Vehicle-Teleport: true #Denies Block Phasing Through Exiting Vehicles!
@@ -29,6 +30,7 @@ Features:
   Anti-Book-Quill-Crash: true #Denies Players to be able to do book and quill crashes
   Anti-Chicken: true #Denies chickens from being hatched from eggs and spawning via eggs
   Anti-Dupe: true #Multiple general dupe patches, more to be added soon
+  Anti-Death-Clip: true #Denies damage being dealt from dead players
   Anti-Natural-Spawn-Faction: false #Denies Natural Mob Spawn ONLY IN Faction Territory (Warzone and Safezone Excluded)
   Anti-Nether-Roof: true #Denies Pistons breaching the nether roof.
   Anti-Piston-Glitch: false #Denies Automatic Piston Farms
@@ -53,7 +55,6 @@ Cooldowns:
   EnderPearl: 15 #Amount of time in seconds
   God_Apple: 60
 
-ironGolemHealth: 50.0 #50.0 = 25 hearts
 
 # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/enchantments/Enchantment.html
 # eg. DURABILITY:1

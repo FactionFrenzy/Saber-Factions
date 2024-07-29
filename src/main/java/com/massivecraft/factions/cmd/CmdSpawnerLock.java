@@ -13,10 +13,10 @@ public class CmdSpawnerLock extends FCommand {
 
     public CmdSpawnerLock() {
         super();
-        this.aliases.addAll(Aliases.spawnerlock);
+        this.getAliases().addAll(Aliases.spawnerlock);
 
-        this.requirements = new CommandRequirements.Builder(Permission.LOCKSPAWNERS)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.LOCKSPAWNERS)
+                .build());
     }
 
     @Override

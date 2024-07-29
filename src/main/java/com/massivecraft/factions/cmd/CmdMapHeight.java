@@ -12,12 +12,12 @@ public class CmdMapHeight extends FCommand {
     public CmdMapHeight() {
         super();
 
-        this.aliases.addAll(Aliases.map_height);
-        this.optionalArgs.put("height", "height");
+        this.getAliases().addAll(Aliases.map_height);
+        this.getOptionalArgs().put("height", "height");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MAPHEIGHT)
+        this.setRequirements(new CommandRequirements.Builder(Permission.MAPHEIGHT)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

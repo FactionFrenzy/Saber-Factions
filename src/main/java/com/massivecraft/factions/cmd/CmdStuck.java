@@ -21,12 +21,12 @@ public class CmdStuck extends FCommand {
 
     public CmdStuck() {
         super();
-        this.aliases.addAll(Aliases.stuck);
+        this.getAliases().addAll(Aliases.stuck);
 
 
-        this.requirements = new CommandRequirements.Builder(Permission.STUCK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.STUCK)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

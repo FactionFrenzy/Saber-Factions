@@ -20,15 +20,15 @@ public class CmdTag extends FCommand {
      */
 
     public CmdTag() {
-        this.aliases.addAll(Aliases.tag);
+        this.getAliases().addAll(Aliases.tag);
 
-        this.requiredArgs.add("faction tag");
+        this.getRequiredArgs().add("faction tag");
 
-        this.requirements = new CommandRequirements.Builder(Permission.TAG)
+        this.setRequirements(new CommandRequirements.Builder(Permission.TAG)
                 .withRole(Role.COLEADER)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

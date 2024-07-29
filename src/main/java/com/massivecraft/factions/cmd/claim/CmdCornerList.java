@@ -21,12 +21,12 @@ import java.util.ArrayList;
 public class CmdCornerList extends FCommand {
     public CmdCornerList() {
         super();
-        this.aliases.addAll(Aliases.corner_list);
-        this.optionalArgs.put("world", "name");
+        this.getAliases().addAll(Aliases.corner_list);
+        this.getOptionalArgs().put("world", "name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CORNER_LIST)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CORNER_LIST)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

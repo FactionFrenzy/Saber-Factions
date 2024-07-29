@@ -99,6 +99,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.12</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.Driftay</groupId>
             <artifactId>WorldGuard-Bridge</artifactId>
             <version>6c80848837</version>
@@ -143,7 +149,7 @@
         <dependency>
             <groupId>be.maximvdw</groupId>
             <artifactId>MVdWPlaceholderAPI</artifactId>
-            <version>3.0.1-SNAPSHOT</version>
+            <version>3.1.1-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/dependencies/MVdWPlaceholderAPI.jar</systemPath>
             <exclusions>

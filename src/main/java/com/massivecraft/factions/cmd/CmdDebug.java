@@ -9,8 +9,8 @@ import org.bukkit.Bukkit;
 public class CmdDebug extends FCommand {
     public CmdDebug() {
         super();
-        this.aliases.add("debug");
-        this.requirements = new CommandRequirements.Builder(Permission.DEBUG).build();
+        this.getAliases().add("debug");
+        this.setRequirements(new CommandRequirements.Builder(Permission.DEBUG).build());
     }
 
     @Override

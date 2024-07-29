@@ -204,6 +204,10 @@ public interface FPlayer extends EconomyParticipator {
 
     void resetFactionData();
 
+    long getLastLogoutTime();
+
+    void setLastLogoutTime(long lastLogoutTime);
+
     long getLastLoginTime();
 
     void setLastLoginTime(long lastLoginTime);

@@ -12,12 +12,12 @@ public class CmdStrikesGive extends FCommand {
 
     public CmdStrikesGive() {
         super();
-        this.aliases.addAll(Aliases.strikes_give);
-        this.requiredArgs.add(0, "faction");
+        this.getAliases().addAll(Aliases.strikes_give);
+        this.getRequiredArgs().add(0, "faction");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SETSTRIKES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETSTRIKES)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

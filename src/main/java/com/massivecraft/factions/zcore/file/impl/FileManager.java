@@ -19,6 +19,7 @@ public class FileManager {
     private void initFiles() {
         customFiles = new HashMap<>();
 
+        customFiles.put("roster", new CustomFile(getFile("configuration", "roster.yml")));
         customFiles.put("boosters", new CustomFile(getFile("data", "boosters.yml")));
         customFiles.put("timers", new CustomFile(getFile("data", "timers.yml")));
         customFiles.put("fperms", new CustomFile(getFile("configuration", "fperms.yml")));
@@ -37,6 +38,7 @@ public class FileManager {
         customFiles.get("timers").setup(true, "data");
         customFiles.get("permissions").setup(true, "data");
         customFiles.get("corex").setup(true, "corex");
+        customFiles.get("roster").setup(true, "configuration");
         customFiles.get("fperms").setup(true, "configuration");
         customFiles.get("upgrades").setup(true, "configuration");
         customFiles.get("missions").setup(true, "configuration");
@@ -79,4 +81,8 @@ public class FileManager {
     public CustomFile getBanners() {
         return getFileByKey("banners");
     }
+    public CustomFile getRoster() {
+        return getFileByKey("roster");
+    }
+
 }

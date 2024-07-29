@@ -26,18 +26,18 @@ public class CmdClaimLine extends FCommand {
     public CmdClaimLine() {
 
         // Aliases
-        this.aliases.addAll(Aliases.claim_line);
+        this.getAliases().addAll(Aliases.claim_line);
 
         // Args
-        this.optionalArgs.put("amount", "1");
-        this.optionalArgs.put("direction", "facing");
-        this.optionalArgs.put("faction", "you");
+        this.getOptionalArgs().put("amount", "1");
+        this.getOptionalArgs().put("direction", "facing");
+        this.getOptionalArgs().put("faction", "you");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CLAIM_LINE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CLAIM_LINE)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.TERRITORY)
-                .build();
+                .build());
     }
 
     @Override

@@ -13,14 +13,14 @@ public class CmdFocus extends FCommand {
      */
 
     public CmdFocus() {
-        aliases.addAll(Aliases.focus);
+        getAliases().addAll(Aliases.focus);
 
-        requiredArgs.add("player");
+        getRequiredArgs().add("player");
 
-        this.requirements = new CommandRequirements.Builder(Permission.FOCUS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.FOCUS)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

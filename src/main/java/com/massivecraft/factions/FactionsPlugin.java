@@ -341,14 +341,14 @@ public class FactionsPlugin extends MPlugin {
         // Must be a LinkedList to prevent UnsupportedOperationException.
         List<String> argsList = new LinkedList<>(Arrays.asList(args));
         CommandContext context = new CommandContext(sender, argsList, alias);
-        List<FCommand> commandsList = cmdBase.subCommands;
+        List<FCommand> commandsList = cmdBase.getSubCommands();
         FCommand commandsEx = cmdBase;
         List<String> completions = new ArrayList<>();
         // Check for "" first arg because spigot is mangled.
         if (context.args.get(0).equals("")) {
-            for (FCommand subCommand : commandsEx.subCommands) {
-                if (subCommand.requirements.isPlayerOnly() && sender.hasPermission(subCommand.requirements.getPermission().node) && subCommand.visibility != CommandVisibility.INVISIBLE)
-                    completions.addAll(subCommand.aliases);
+            for (FCommand subCommand : commandsEx.getSubCommands()) {
+                if (subCommand.getRequirements().isPlayerOnly() && sender.hasPermission(subCommand.getRequirements().getPermission().node) && subCommand.getVisibility() != CommandVisibility.INVISIBLE)
+                    completions.addAll(subCommand.getAliases());
             }
             return completions;
         } else if (context.args.size() == 1) {
@@ -356,10 +356,10 @@ public class FactionsPlugin extends MPlugin {
                 String cmdName = context.args.get(0).toLowerCase();
                 boolean toggle = false;
                 for (FCommand fCommand : commandsList) {
-                    for (String s : fCommand.aliases) {
+                    for (String s : fCommand.getAliases()) {
                         if (s.startsWith(cmdName)) {
-                            commandsList = fCommand.subCommands;
-                            completions.addAll(fCommand.aliases);
+                            commandsList = fCommand.getSubCommands();
+                            completions.addAll(fCommand.getAliases());
                             toggle = true;
                             break;
                         }

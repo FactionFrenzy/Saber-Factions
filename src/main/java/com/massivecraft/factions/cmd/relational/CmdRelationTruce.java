@@ -10,7 +10,7 @@ public class CmdRelationTruce extends FRelationCommand {
      */
 
     public CmdRelationTruce() {
-        aliases.addAll(Aliases.relation_truce);
+        getAliases().addAll(Aliases.relation_truce);
         targetRelation = Relation.TRUCE;
     }
 }

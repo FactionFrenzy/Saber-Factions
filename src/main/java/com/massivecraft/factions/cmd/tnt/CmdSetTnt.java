@@ -12,11 +12,11 @@ import org.bukkit.ChatColor;
 public class CmdSetTnt extends FCommand {
 
     public CmdSetTnt() {
-        this.aliases.addAll(Aliases.setTnt);
-        this.requiredArgs.add("faction");
-        this.requiredArgs.add("amount");
+        this.getAliases().addAll(Aliases.setTnt);
+        this.getRequiredArgs().add("faction");
+        this.getRequiredArgs().add("amount");
 
-        this.requirements = new CommandRequirements.Builder(Permission.SET_TNT).build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.SET_TNT).build());
     }
 
     @Override

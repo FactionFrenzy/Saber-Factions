@@ -121,9 +121,9 @@ public class Aliases {
     public static ArrayList<String> perm = new ArrayList<>(Arrays.asList("perm", "perms", "permission", "permissions"));
     public static ArrayList<String> permanent_faction = new ArrayList<>(Collections.singletonList("permanent"));
 
-    public static ArrayList<String> roster_rosters = new ArrayList<>(Arrays.asList("rosters", "roster"));
+    public static ArrayList<String> roster_rosters = new ArrayList<>(Arrays.asList("roster", "rosters"));
     public static ArrayList<String> roster_invite = new ArrayList<>(Arrays.asList("add", "invite"));
-    public static ArrayList<String> roster_kick = new ArrayList<>(Collections.singletonList("kick"));
+    public static ArrayList<String> roster_kick = new ArrayList<>(Arrays.asList("kick", "remove"));
 
     public static ArrayList<String> permanent_power = new ArrayList<>(Collections.singletonList("permanentpower"));
     public static ArrayList<String> titles = new ArrayList<>(Collections.singletonList("titles"));

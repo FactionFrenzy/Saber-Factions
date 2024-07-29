@@ -20,15 +20,15 @@ public class CmdAlts extends FCommand {
 
     public CmdAlts() {
         super();
-        this.aliases.addAll(Aliases.alts_alts);
+        this.getAliases().addAll(Aliases.alts_alts);
         this.addSubCommand(this.cmdInviteAlt);
         this.addSubCommand(this.cmdAltsList);
         this.addSubCommand(this.cmdKickAlt);
 
-        this.requirements = new CommandRequirements.Builder(Permission.ALTS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.ALTS)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

@@ -14,14 +14,14 @@ public class CmdUnban extends FCommand {
 
     public CmdUnban() {
         super();
-        this.aliases.addAll(Aliases.unban);
-        this.requiredArgs.add("target");
+        this.getAliases().addAll(Aliases.unban);
+        this.getRequiredArgs().add("target");
 
-        this.requirements = new CommandRequirements.Builder(Permission.BAN)
+        this.setRequirements(new CommandRequirements.Builder(Permission.BAN)
                 .playerOnly()
                 .memberOnly()
                 .withAction(PermissableAction.BAN)
-                .build();
+                .build());
     }
 
     @Override

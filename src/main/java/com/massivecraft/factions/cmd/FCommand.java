@@ -16,55 +16,54 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
 public abstract class FCommand {
 
     /**
-     * @author FactionsUUID Team - Modified By CmdrKittens
+     * Author: FactionsUUID Team - Modified By CmdrKittens
      */
 
-    public SimpleDateFormat sdf = new SimpleDateFormat(TL.DATE_FORMAT.toString());
+    private final SimpleDateFormat sdf = new SimpleDateFormat(TL.DATE_FORMAT.toString());
 
     // Command Aliases
-    public List<String> aliases;
+    private final List<String> aliases;
 
     // Information on the args
-    public List<String> requiredArgs;
-    public LinkedHashMap<String, String> optionalArgs;
+    private final List<String> requiredArgs;
+    private final LinkedHashMap<String, String> optionalArgs;
 
     // Requirements to execute this command
-    public CommandRequirements requirements;
+    private CommandRequirements requirements;
     /*
         Subcommands
      */
-    public List<FCommand> subCommands;
+    private final List<FCommand> subCommands;
     /*
         Help
      */
-    public List<String> helpLong;
-    public CommandVisibility visibility;
+    private final List<String> helpLong;
+    private CommandVisibility visibility;
     private String helpShort;
 
     public FCommand() {
-
         requirements = new CommandRequirements.Builder(null).build();
-
-        this.subCommands = new ArrayList<>();
-        this.aliases = new ArrayList<>();
-
-        this.requiredArgs = new ArrayList<>();
-        this.optionalArgs = new LinkedHashMap<>();
-
-        this.helpShort = null;
-        this.helpLong = new ArrayList<>();
-        this.visibility = CommandVisibility.VISIBLE;
+        subCommands = new ArrayList<>();
+        aliases = new ArrayList<>();
+        requiredArgs = new ArrayList<>();
+        optionalArgs = new LinkedHashMap<>();
+        helpShort = null;
+        helpLong = new ArrayList<>();
+        visibility = CommandVisibility.VISIBLE;
     }
 
     public abstract void perform(CommandContext context);
 
     public void execute(CommandContext context) {
-        // Is there a matching sub command?
         if (context.args.size() > 0) {
-            for (FCommand subCommand : this.subCommands) {
+            for (FCommand subCommand : subCommands) {
                 if (subCommand.aliases.contains(context.args.get(0).toLowerCase())) {
                     context.args.remove(0);
                     context.commandChain.add(this);
@@ -74,11 +73,7 @@ public abstract class FCommand {
             }
         }
 
-        if (!validCall(context)) {
-            return;
-        }
-
-        if (!this.isEnabled(context)) {
+        if (!validCall(context) || !isEnabled(context)) {
             return;
         }
 
@@ -98,20 +93,19 @@ public abstract class FCommand {
     }
 
     public boolean validArgs(CommandContext context) {
-        if (context.args.size() < this.requiredArgs.size()) {
+        if (context.args.size() < requiredArgs.size()) {
             if (context.sender != null) {
                 context.msg(TL.GENERIC_ARGS_TOOFEW);
-                context.sender.sendMessage(this.getUsageTemplate(context));
+                context.sender.sendMessage(getUsageTemplate(context));
             }
             return false;
         }
 
-        if (context.args.size() > this.requiredArgs.size() + this.optionalArgs.size() && this.requirements.isErrorOnManyArgs()) {
+        if (context.args.size() > requiredArgs.size() + optionalArgs.size() && requirements.isErrorOnManyArgs()) {
             if (context.sender != null) {
-                // Get the too much string slice
-                List<String> theToMany = context.args.subList(this.requiredArgs.size() + this.optionalArgs.size(), context.args.size());
+                List<String> theToMany = context.args.subList(requiredArgs.size() + optionalArgs.size(), context.args.size());
                 context.msg(TL.GENERIC_ARGS_TOOMANY, TextUtil.implode(theToMany, " "));
-                context.sender.sendMessage(this.getUsageTemplate(context));
+                context.sender.sendMessage(getUsageTemplate(context));
             }
             return false;
         }
@@ -119,41 +113,29 @@ public abstract class FCommand {
     }
 
     public void addSubCommand(FCommand subCommand) {
-        this.subCommands.add(subCommand);
+        subCommands.add(subCommand);
     }
 
     public String getHelpShort() {
-        if (this.helpShort == null) {
-            return getUsageTranslation().toString();
-        }
-
-        return this.helpShort;
+        return (helpShort == null) ? getUsageTranslation().toString() : helpShort;
     }
 
     public void setHelpShort(String val) {
-        this.helpShort = val;
+        helpShort = val;
     }
 
     public abstract TL getUsageTranslation();
 
-
-    /*
-        Common Logic
-     */
     public List<String> getToolTips(FPlayer player) {
-        List<String> lines = new ArrayList<>();
-        for (String s : FactionsPlugin.getInstance().getConfig().getStringList("tooltips.show")) {
-            lines.add(CC.translate(replaceFPlayerTags(s, player)));
-        }
-        return lines;
+        return FactionsPlugin.getInstance().getConfig().getStringList("tooltips.show").stream()
+                .map(s -> CC.translate(replaceFPlayerTags(s, player)))
+                .collect(Collectors.toList());
     }
 
     public List<String> getToolTips(Faction faction) {
-        List<String> lines = new ArrayList<>();
-        for (String s : FactionsPlugin.getInstance().getConfig().getStringList("tooltips.list")) {
-            lines.add(CC.translate(replaceFactionTags(s, faction)));
-        }
-        return lines;
+        return FactionsPlugin.getInstance().getConfig().getStringList("tooltips.list").stream()
+                .map(s -> CC.translate(replaceFactionTags(s, faction)))
+                .collect(Collectors.toList());
     }
 
     public String replaceFPlayerTags(String s, FPlayer player) {
@@ -186,7 +168,7 @@ public abstract class FCommand {
         }
         if (s.contains("{leader}")) {
             FPlayer fLeader = faction.getFPlayerAdmin();
-            String leader = fLeader == null ? "Server" : fLeader.getName().substring(0, fLeader.getName().length() > 14 ? 13 : fLeader.getName().length());
+            String leader = fLeader == null ? "Server" : fLeader.getName().substring(0, Math.min(fLeader.getName().length(), 13));
             s = TextUtil.replace(s, "{leader}", leader);
         }
         if (s.contains("{chunks}")) {
@@ -194,7 +176,6 @@ public abstract class FCommand {
         }
         if (s.contains("{members}")) {
             s = TextUtil.replace(s, "{members}", String.valueOf(faction.getSize()));
-
         }
         if (s.contains("{online}")) {
             s = TextUtil.replace(s, "{online}", String.valueOf(faction.getOnlinePlayers().size()));
@@ -202,44 +183,29 @@ public abstract class FCommand {
         return s;
     }
 
-    /*
-    Help and Usage information
- */
     public String getUsageTemplate(CommandContext context, boolean addShortHelp) {
-        StringBuilder ret = new StringBuilder((CC.translate(TL.COMMAND_USEAGE_TEMPLATE_COLOR.toString())));
+        StringBuilder ret = new StringBuilder(CC.translate(TL.COMMAND_USEAGE_TEMPLATE_COLOR.toString()));
         ret.append('/');
 
-        for (FCommand fc : context.commandChain) {
+        context.commandChain.forEach(fc -> {
             ret.append(TextUtil.implode(fc.aliases, ","));
             ret.append(' ');
-        }
+        });
 
-        ret.append(TextUtil.implode(this.aliases, ","));
+        ret.append(TextUtil.implode(aliases, ","));
 
         List<String> args = new ArrayList<>();
+        requiredArgs.forEach(requiredArg -> args.add("<" + requiredArg + ">"));
+        optionalArgs.forEach((key, value) -> args.add("[" + key + (value == null ? "" : "=" + value) + "]"));
 
-        for (String requiredArg : this.requiredArgs) {
-            args.add("<" + requiredArg + ">");
-        }
-
-        for (Map.Entry<String, String> optionalArg : this.optionalArgs.entrySet()) {
-            String val = optionalArg.getValue();
-            if (val == null) {
-                val = "";
-            } else {
-                val = "=" + val;
-            }
-            args.add("[" + optionalArg.getKey() + val + "]");
-        }
-
-        if (args.size() > 0) {
+        if (!args.isEmpty()) {
             ret.append(TextUtil.parseTags(" "));
             ret.append(TextUtil.implode(args, " "));
         }
 
         if (addShortHelp) {
             ret.append(TextUtil.parseTags(" "));
-            ret.append(this.getHelpShort());
+            ret.append(getHelpShort());
         }
 
         return ret.toString();
@@ -249,4 +215,40 @@ public abstract class FCommand {
         return getUsageTemplate(context, false);
     }
 
+    // Getters and Setters
+    public List<String> getAliases() {
+        return aliases;
+    }
+
+    public List<String> getRequiredArgs() {
+        return requiredArgs;
+    }
+
+    public LinkedHashMap<String, String> getOptionalArgs() {
+        return optionalArgs;
+    }
+
+    public CommandRequirements getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(CommandRequirements requirements) {
+        this.requirements = requirements;
+    }
+
+    public List<FCommand> getSubCommands() {
+        return subCommands;
+    }
+
+    public List<String> getHelpLong() {
+        return helpLong;
+    }
+
+    public CommandVisibility getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(CommandVisibility visibility) {
+        this.visibility = visibility;
+    }
 }

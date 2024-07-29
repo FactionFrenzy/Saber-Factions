@@ -15,12 +15,12 @@ public class CmdMap extends FCommand {
 
     public CmdMap() {
         super();
-        this.aliases.addAll(Aliases.map_map);
-        this.optionalArgs.put("on/off", "once");
+        this.getAliases().addAll(Aliases.map_map);
+        this.getOptionalArgs().put("on/off", "once");
 
-        this.requirements = new CommandRequirements.Builder(Permission.MAP)
+        this.setRequirements(new CommandRequirements.Builder(Permission.MAP)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

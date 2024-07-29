@@ -10,7 +10,7 @@ public class CmdRelationAlly extends FRelationCommand {
      */
 
     public CmdRelationAlly() {
-        aliases.addAll(Aliases.relation_ally);
+        getAliases().addAll(Aliases.relation_ally);
         targetRelation = Relation.ALLY;
     }
 }

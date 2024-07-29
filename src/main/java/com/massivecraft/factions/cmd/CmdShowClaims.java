@@ -14,13 +14,13 @@ public class CmdShowClaims extends FCommand {
      */
 
     public CmdShowClaims() {
-        this.aliases.addAll(Aliases.show_claims);
+        this.getAliases().addAll(Aliases.show_claims);
 
-        this.requirements = new CommandRequirements.Builder(Permission.SHOWCLAIMS)
+        this.setRequirements(new CommandRequirements.Builder(Permission.SHOWCLAIMS)
                 .withAction(PermissableAction.TERRITORY)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

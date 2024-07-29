@@ -17,16 +17,16 @@ public class CmdAnnounce extends FCommand {
 
     public CmdAnnounce() {
         super();
-        this.aliases.addAll(Aliases.announce);
+        this.getAliases().addAll(Aliases.announce);
 
-        this.requiredArgs.add("message");
+        this.getRequiredArgs().add("message");
 
-        this.requirements = new CommandRequirements.Builder(Permission.ANNOUNCE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.ANNOUNCE)
                 .playerOnly()
                 .memberOnly()
                 .brigadier(AnnounceBrigadier.class)
                 .noErrorOnManyArgs()
-                .build();
+                .build());
     }
 
     @Override

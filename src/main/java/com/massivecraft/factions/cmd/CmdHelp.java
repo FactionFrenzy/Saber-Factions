@@ -23,13 +23,13 @@ public class CmdHelp extends FCommand {
     //TODO: Add Help GUI
     public CmdHelp() {
         super();
-        this.aliases.addAll(Aliases.help);
+        this.getAliases().addAll(Aliases.help);
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("page", "1");
+        this.getOptionalArgs().put("page", "1");
 
-        this.requirements = new CommandRequirements.Builder(Permission.HELP)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.HELP)
+                .build());
     }
 
     //----------------------------------------------//

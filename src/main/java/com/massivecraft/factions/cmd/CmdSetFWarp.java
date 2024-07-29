@@ -15,10 +15,10 @@ public class CmdSetFWarp extends FCommand {
      */
 
     public CmdSetFWarp() {
-        this.aliases.addAll(Aliases.setWarp);
-        this.requiredArgs.add("warp name");
-        this.optionalArgs.put("password", "password");
-        this.requirements = new CommandRequirements.Builder(Permission.SETWARP).playerOnly().memberOnly().withAction(PermissableAction.SETWARP).build();
+        this.getAliases().addAll(Aliases.setWarp);
+        this.getRequiredArgs().add("warp name");
+        this.getOptionalArgs().put("password", "password");
+        this.setRequirements(new CommandRequirements.Builder(Permission.SETWARP).playerOnly().memberOnly().withAction(PermissableAction.SETWARP).build());
     }
 
     @Override

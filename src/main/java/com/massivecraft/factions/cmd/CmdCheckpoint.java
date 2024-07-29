@@ -16,11 +16,11 @@ public class CmdCheckpoint extends FCommand {
 
     public CmdCheckpoint() {
         super();
-        this.aliases.addAll(Aliases.checkpoint);
+        this.getAliases().addAll(Aliases.checkpoint);
 
-        this.optionalArgs.put("set", "");
+        this.getOptionalArgs().put("set", "");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CHECKPOINT).playerOnly().memberOnly().build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.CHECKPOINT).playerOnly().memberOnly().build());
     }
 
     @Override

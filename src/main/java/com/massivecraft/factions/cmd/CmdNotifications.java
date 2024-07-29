@@ -12,10 +12,10 @@ public class CmdNotifications extends FCommand {
 
     public CmdNotifications() {
         super();
-        this.aliases.addAll(Aliases.notifications);
-        this.requirements = new CommandRequirements.Builder(Permission.NOTIFICATIONS)
+        this.getAliases().addAll(Aliases.notifications);
+        this.setRequirements(new CommandRequirements.Builder(Permission.NOTIFICATIONS)
                 .playerOnly()
-                .build();
+                .build());
     }
 
 

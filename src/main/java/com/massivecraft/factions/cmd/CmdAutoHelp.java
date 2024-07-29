@@ -13,11 +13,11 @@ public class CmdAutoHelp extends FCommand {
      */
 
     public CmdAutoHelp() {
-        this.aliases.addAll(Aliases.help);
+        this.getAliases().addAll(Aliases.help);
 
         this.setHelpShort("");
 
-        this.optionalArgs.put("page", "1");
+        this.getOptionalArgs().put("page", "1");
     }
 
     @Override
@@ -27,16 +27,16 @@ public class CmdAutoHelp extends FCommand {
         }
         FCommand pcmd = context.commandChain.get(context.commandChain.size() - 1);
 
-        ArrayList<String> lines = new ArrayList<>(pcmd.helpLong);
+        ArrayList<String> lines = new ArrayList<>(pcmd.getHelpLong());
 
-        for (FCommand scmd : pcmd.subCommands) {
-            if (scmd.visibility == CommandVisibility.VISIBLE) {
+        for (FCommand scmd : pcmd.getSubCommands()) {
+            if (scmd.getVisibility() == CommandVisibility.VISIBLE) {
                 lines.add(scmd.getUsageTemplate(context, true));
             }
             // TODO deal with other visibilities
         }
 
-        context.sendMessage(TextUtil.getPage(lines, context.argAsInt(0, 1), TL.COMMAND_AUTOHELP_HELPFOR + pcmd.aliases.get(0) + "\""));
+        context.sendMessage(TextUtil.getPage(lines, context.argAsInt(0, 1), "\"" + TL.COMMAND_AUTOHELP_HELPFOR + " " + pcmd.getAliases().get(0) + "\""));
     }
 
     @Override

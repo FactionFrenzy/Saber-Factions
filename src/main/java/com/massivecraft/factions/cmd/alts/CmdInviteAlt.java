@@ -26,13 +26,13 @@ public class CmdInviteAlt extends FCommand {
 
     public CmdInviteAlt() {
         super();
-        this.aliases.addAll(Aliases.alts_invite);
-        this.requiredArgs.add("player name");
+        this.getAliases().addAll(Aliases.alts_invite);
+        this.getRequiredArgs().add("player name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.INVITE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.INVITE)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override
@@ -44,6 +44,7 @@ public class CmdInviteAlt extends FCommand {
 
         FPlayer target = context.argAsBestFPlayerMatch(0);
         if (target == null) {
+
             return;
         }
 

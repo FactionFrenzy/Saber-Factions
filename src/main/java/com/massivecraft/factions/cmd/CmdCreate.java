@@ -24,13 +24,13 @@ public class CmdCreate extends FCommand {
 
     public CmdCreate() {
         super();
-        this.aliases.addAll(Aliases.create);
+        this.getAliases().addAll(Aliases.create);
 
-        this.requiredArgs.add("faction tag");
+        this.getRequiredArgs().add("faction tag");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CREATE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CREATE)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

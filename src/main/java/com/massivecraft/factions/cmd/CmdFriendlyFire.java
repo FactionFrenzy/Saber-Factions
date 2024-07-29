@@ -13,12 +13,12 @@ public class CmdFriendlyFire extends FCommand {
 
     public CmdFriendlyFire() {
         super();
-        this.aliases.addAll(Aliases.friendlyFire);
+        this.getAliases().addAll(Aliases.friendlyFire);
 
-        this.requirements = new CommandRequirements.Builder(Permission.FRIENDLYFIRE)
+        this.setRequirements(new CommandRequirements.Builder(Permission.FRIENDLYFIRE)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

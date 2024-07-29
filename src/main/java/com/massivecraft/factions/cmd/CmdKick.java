@@ -27,14 +27,14 @@ public class CmdKick extends FCommand {
 
     public CmdKick() {
         super();
-        this.aliases.addAll(Aliases.kick);
-        this.optionalArgs.put("player name", "player name");
+        this.getAliases().addAll(Aliases.kick);
+        this.getOptionalArgs().put("player name", "player name");
 
-        this.requirements = new CommandRequirements.Builder(Permission.KICK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.KICK)
                 .playerOnly()
                 .withAction(PermissableAction.KICK)
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

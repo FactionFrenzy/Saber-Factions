@@ -17,12 +17,12 @@ import com.massivecraft.factions.zcore.util.TL;
 public class CmdSetRelation extends FCommand {
 
     public CmdSetRelation() {
-        this.aliases.addAll(Aliases.setRelation);
-        this.requirements = new CommandRequirements.Builder(Permission.SET_RELATION).build();
+        this.getAliases().addAll(Aliases.setRelation);
+        this.setRequirements(new CommandRequirements.Builder(Permission.SET_RELATION).build());
 
-        this.requiredArgs.add("ENEMY, NEUTRAL, TRUCE, ALLY");
-        this.requiredArgs.add("fac1");
-        this.requiredArgs.add("fac2");
+        this.getRequiredArgs().add("ENEMY, NEUTRAL, TRUCE, ALLY");
+        this.getRequiredArgs().add("fac1");
+        this.getRequiredArgs().add("fac2");
 
     }
 

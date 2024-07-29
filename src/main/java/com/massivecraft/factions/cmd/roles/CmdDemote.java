@@ -9,7 +9,7 @@ public class CmdDemote extends FPromoteCommand {
      */
 
     public CmdDemote() {
-        aliases.addAll(Aliases.roles_demote);
+        this.getAliases().addAll(Aliases.roles_demote);
         this.relative = -1;
     }
 }

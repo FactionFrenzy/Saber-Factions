@@ -25,26 +25,26 @@ import java.util.stream.Collectors;
 
 public class CmdTntFill extends FCommand {
 
-    private Map<Player, TNTFillTask> fillTaskMap;
+    private final Map<Player, TNTFillTask> fillTaskMap;
 
-    private boolean tntFillEnabled;
-    private int maxTntFillRadius;
-    private int maxTntFillAmount;
+    private final boolean tntFillEnabled;
+    private final int maxTntFillRadius;
+    private final int maxTntFillAmount;
 
     public CmdTntFill() {
         super();
         this.fillTaskMap = new WeakHashMap<>();
-        this.aliases.addAll(Aliases.tnt_tntfill);
+        this.getAliases().addAll(Aliases.tnt_tntfill);
 
-        this.requiredArgs.add("radius");
-        this.requiredArgs.add("amount");
+        this.getRequiredArgs().add("radius");
+        this.getRequiredArgs().add("amount");
 
         FactionsPlugin plugin = FactionsPlugin.getInstance();
         this.tntFillEnabled = plugin.getConfig().getBoolean("Tntfill.enabled");
         this.maxTntFillRadius = plugin.getConfig().getInt("Tntfill.max-radius");
         this.maxTntFillAmount = plugin.getConfig().getInt("Tntfill.max-amount");
 
-        this.requirements = new CommandRequirements.Builder(Permission.TNTFILL).playerOnly().memberOnly().withAction(PermissableAction.TNTFILL).build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.TNTFILL).playerOnly().memberOnly().withAction(PermissableAction.TNTFILL).build());
     }
 
     @Override

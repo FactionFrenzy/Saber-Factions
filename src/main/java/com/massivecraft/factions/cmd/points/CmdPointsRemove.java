@@ -18,13 +18,13 @@ public class CmdPointsRemove extends FCommand {
 
     public CmdPointsRemove() {
         super();
-        this.aliases.addAll(Aliases.points_remove);
+        this.getAliases().addAll(Aliases.points_remove);
 
-        this.requiredArgs.add("faction/player");
-        this.requiredArgs.add("# of points");
+        this.getRequiredArgs().add("faction/player");
+        this.getRequiredArgs().add("# of points");
 
-        this.requirements = new CommandRequirements.Builder(Permission.REMOVEPOINTS)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.REMOVEPOINTS)
+                .build());
 
     }
 

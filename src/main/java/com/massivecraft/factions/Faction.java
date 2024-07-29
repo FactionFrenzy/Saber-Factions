@@ -1,5 +1,6 @@
 package com.massivecraft.factions;
 
+import com.massivecraft.factions.cmd.roster.struct.RosterPlayer;
 import com.massivecraft.factions.event.FactionDisbandEvent.PlayerDisbandReason;
 import com.massivecraft.factions.iface.EconomyParticipator;
 import com.massivecraft.factions.iface.RelationParticipator;
@@ -22,6 +23,14 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface Faction extends EconomyParticipator {
+
+
+    //ROSTER
+    Set<RosterPlayer> getRoster();
+    int getRosterKicks();
+    void setRosterKicks(int kicks);
+
+
 
     double getFactionBalance();
 

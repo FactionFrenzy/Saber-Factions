@@ -12,14 +12,14 @@ public class CmdBoom extends FCommand {
 
     public CmdBoom() {
         super();
-        this.aliases.addAll(Aliases.boom);
+        this.getAliases().addAll(Aliases.boom);
 
         //this.requiredArgs.add("");
-        this.optionalArgs.put("on/off", "flip");
+        this.getOptionalArgs().put("on/off", "flip");
 
-        this.requirements = new CommandRequirements.Builder(Permission.NO_BOOM)
+        this.setRequirements(new CommandRequirements.Builder(Permission.NO_BOOM)
                 .playerOnly()
-                .build();
+                .build());
     }
 
     @Override

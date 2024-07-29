@@ -16,15 +16,15 @@ public class CmdRules extends FCommand {
 
     public CmdRules() {
         super();
-        aliases.addAll(Aliases.rules);
+        getAliases().addAll(Aliases.rules);
 
-        this.optionalArgs.put("add/remove/set/clear", "");
+        this.getOptionalArgs().put("add/remove/set/clear", "");
 
-        this.requirements = new CommandRequirements.Builder(Permission.RULES)
+        this.setRequirements(new CommandRequirements.Builder(Permission.RULES)
                 .playerOnly()
                 .memberOnly()
                 .noErrorOnManyArgs()
-                .build();
+                .build());
     }
 
     @Override

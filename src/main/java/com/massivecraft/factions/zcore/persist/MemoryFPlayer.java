@@ -60,6 +60,7 @@ public abstract class MemoryFPlayer implements FPlayer {
     protected long lastPowerUpdateTime;
     protected long millisPassed;
     protected long lastLoginTime;
+    protected long lastLogoutTime;
     protected ChatMode chatMode;
     protected boolean ignoreAllianceChat = false;
     protected String id;
@@ -101,6 +102,7 @@ public abstract class MemoryFPlayer implements FPlayer {
         this.power = Conf.powerPlayerStarting;
         this.lastPowerUpdateTime = System.currentTimeMillis();
         this.lastLoginTime = System.currentTimeMillis();
+        this.lastLogoutTime = 0;
         this.isAlt = false;
         this.mapAutoUpdating = false;
         this.autoClaimFor = null;
@@ -123,6 +125,7 @@ public abstract class MemoryFPlayer implements FPlayer {
         this.id = other.id;
         this.power = other.power;
         this.lastLoginTime = other.lastLoginTime;
+        this.lastLogoutTime = other.lastLogoutTime;
         this.mapAutoUpdating = other.mapAutoUpdating;
         this.autoClaimFor = other.autoClaimFor;
         this.loginPvpDisabled = other.loginPvpDisabled;
@@ -140,6 +143,13 @@ public abstract class MemoryFPlayer implements FPlayer {
         this.showScoreboard = FactionsPlugin.getInstance().getConfig().getBoolean("scoreboard.default-enabled", true);
         this.mapHeight = Conf.mapHeight;
         this.notificationsEnabled = true;
+    }
+    public long getLastLogoutTime() {
+        return lastLogoutTime;
+    }
+
+    public void setLastLogoutTime(long lastLogoutTime) {
+        this.lastLogoutTime = lastLogoutTime;
     }
 
     public boolean isAlt() {
@@ -797,7 +807,7 @@ public abstract class MemoryFPlayer implements FPlayer {
 
         boolean perm = myFaction.isPermanent();
 
-        if (!perm && this.getRole() == Role.LEADER && myFaction.getFPlayers().size() > 1) {
+        if (!perm && this.getRole() == Role.LEADER && myFaction.getFPlayers().size() == 1) {
             msg(TL.LEAVE_PASSADMIN);
             return;
         }
@@ -1317,33 +1327,44 @@ public abstract class MemoryFPlayer implements FPlayer {
     public void checkIfNearbyEnemies() {
         Player me = getPlayer();
 
-        if (me == null || me.hasPermission("factions.fly.bypassnearbyenemycheck")) return;
+        if (me == null || me.hasPermission("factions.fly.bypassnearbyenemycheck")) {
+            return;
+        }
 
         int radius = Conf.stealthFlyCheckRadius;
         boolean foundEnemy = false;
-        for (Entity entity : me.getNearbyEntities(radius, 255, radius)) {
-            if (entity instanceof Player) {
-                Player enemyPlayer = ((Player) entity);
-                if (enemyPlayer.hasMetadata("NPC")) continue;
-                FPlayer enemyFPlayer = FPlayers.getInstance().getByPlayer(enemyPlayer);
-                if (enemyFPlayer == null || !me.canSee(enemyPlayer) || enemyFPlayer.isVanished()) continue;
-                if (getRelationTo(enemyFPlayer).equals(Relation.ENEMY) && !enemyFPlayer.isStealthEnabled()) {
-                    foundEnemy = true;
-                    break;
-                }
+
+        List<Entity> nearbyEntities = me.getNearbyEntities(radius, 255, radius);
+
+        for (Entity entity : nearbyEntities) {
+            if (!(entity instanceof Player)) {
+                continue;
+            }
+
+            Player enemyPlayer = (Player) entity;
+            if (enemyPlayer.hasMetadata("NPC")) {
+                continue; // Skip NPCs
+            }
+
+            FPlayer enemyFPlayer = FPlayers.getInstance().getByPlayer(enemyPlayer);
+            if (enemyFPlayer == null || !me.canSee(enemyPlayer) || enemyFPlayer.isVanished()) {
+                continue; // Skip invalid or vanished players
+            }
+
+            if (getRelationTo(enemyFPlayer) == Relation.ENEMY && !enemyFPlayer.isStealthEnabled()) {
+                foundEnemy = true;
+                break;
             }
         }
 
-        if (foundEnemy) {
-            if (me.isFlying()) {
-                setFlying(false);
-                msg(TL.COMMAND_FLY_ENEMY_NEAR);
-                Bukkit.getServer().getPluginManager().callEvent(new FPlayerStoppedFlying(this));
-            }
-            enemiesNearby = true;
-        } else {
-            enemiesNearby = false;
+        if (foundEnemy && me.isFlying()) {
+            setFlying(false);
+            msg(TL.COMMAND_FLY_ENEMY_NEAR);
+            Bukkit.getServer().getPluginManager().callEvent(new FPlayerStoppedFlying(this));
         }
+
+        // Update the enemiesNearby flag
+        enemiesNearby = foundEnemy;
     }
 
     @Override

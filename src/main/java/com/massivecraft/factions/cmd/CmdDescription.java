@@ -19,15 +19,15 @@ public class CmdDescription extends FCommand {
 
     public CmdDescription() {
         super();
-        this.aliases.addAll(Aliases.description);
+        this.getAliases().addAll(Aliases.description);
 
-        this.requiredArgs.add("desc");
+        this.getRequiredArgs().add("desc");
 
-        this.requirements = new CommandRequirements.Builder(Permission.DESCRIPTION)
+        this.setRequirements(new CommandRequirements.Builder(Permission.DESCRIPTION)
                 .playerOnly()
                 .withRole(Role.MODERATOR)
                 .noErrorOnManyArgs()
-                .build();
+                .build());
     }
 
     @Override

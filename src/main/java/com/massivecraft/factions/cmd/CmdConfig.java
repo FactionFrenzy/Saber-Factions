@@ -16,18 +16,18 @@ import java.util.Set;
 
 public class CmdConfig extends FCommand {
 
-    private static HashMap<String, String> properFieldNames = new HashMap<>();
+    private static final HashMap<String, String> properFieldNames = new HashMap<>();
 
     public CmdConfig() {
         super();
-        this.aliases.addAll(Aliases.config);
+        this.getAliases().addAll(Aliases.config);
 
-        this.requiredArgs.add("setting");
-        this.requiredArgs.add("value");
+        this.getRequiredArgs().add("setting");
+        this.getRequiredArgs().add("value");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CONFIG)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CONFIG)
                 .noErrorOnManyArgs()
-                .build();
+                .build());
     }
 
     @Override

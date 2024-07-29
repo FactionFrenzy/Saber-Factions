@@ -20,14 +20,14 @@ public class CmdBan extends FCommand {
 
     public CmdBan() {
         super();
-        this.aliases.addAll(Aliases.ban_ban);
+        this.getAliases().addAll(Aliases.ban_ban);
 
-        this.requiredArgs.add("target");
+        this.getRequiredArgs().add("target");
 
-        this.requirements = new CommandRequirements.Builder(Permission.BAN)
+        this.setRequirements(new CommandRequirements.Builder(Permission.BAN)
                 .playerOnly()
                 .withAction(PermissableAction.BAN)
-                .build();
+                .build());
     }
 
     @Override

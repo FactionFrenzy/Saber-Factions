@@ -14,14 +14,14 @@ public class CmdOwner extends FCommand {
 
     public CmdOwner() {
         super();
-        this.aliases.addAll(Aliases.owner_owner);
-        this.optionalArgs.put("player name", "you");
+        this.getAliases().addAll(Aliases.owner_owner);
+        this.getOptionalArgs().put("player name", "you");
 
-        this.requirements = new CommandRequirements.Builder(Permission.OWNER)
+        this.setRequirements(new CommandRequirements.Builder(Permission.OWNER)
                 .withRole(Role.LEADER)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     // TODO: Fix colors!

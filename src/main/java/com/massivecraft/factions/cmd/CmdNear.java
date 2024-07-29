@@ -16,12 +16,12 @@ public class CmdNear extends FCommand {
 
     public CmdNear() {
         super();
-        this.aliases.addAll(Aliases.near);
+        this.getAliases().addAll(Aliases.near);
 
-        this.requirements = new CommandRequirements.Builder(Permission.NEAR)
+        this.setRequirements(new CommandRequirements.Builder(Permission.NEAR)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     @Override

@@ -13,11 +13,11 @@ public class CmdVersion extends FCommand {
      */
 
     public CmdVersion() {
-        this.aliases.add("version");
-        this.aliases.add("ver");
+        this.getAliases().add("version");
+        this.getAliases().add("ver");
 
-        this.requirements = new CommandRequirements.Builder(Permission.VERSION)
-                .build();
+        this.setRequirements(new CommandRequirements.Builder(Permission.VERSION)
+                .build());
     }
 
     @Override

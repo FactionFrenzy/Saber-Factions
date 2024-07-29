@@ -10,7 +10,7 @@ public class CmdRelationNeutral extends FRelationCommand {
      */
 
     public CmdRelationNeutral() {
-        aliases.addAll(Aliases.relation_neutral);
+        getAliases().addAll(Aliases.relation_neutral);
         targetRelation = Relation.NEUTRAL;
     }
 }

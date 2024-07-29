@@ -14,13 +14,13 @@ public class CmdWeeWoo extends FCommand {
      */
 
     public CmdWeeWoo() {
-        this.aliases.addAll(Aliases.weewoo);
-        this.requiredArgs.add("start/stop");
+        this.getAliases().addAll(Aliases.weewoo);
+        this.getRequiredArgs().add("start/stop");
 
-        this.requirements = new CommandRequirements.Builder(Permission.CHECK)
+        this.setRequirements(new CommandRequirements.Builder(Permission.CHECK)
                 .playerOnly()
                 .memberOnly()
-                .build();
+                .build());
     }
 
     public void perform(CommandContext context) {
