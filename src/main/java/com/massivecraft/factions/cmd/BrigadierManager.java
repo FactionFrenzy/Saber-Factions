@@ -1,6 +1,5 @@
 package com.massivecraft.factions.cmd;
 
-import com.massivecraft.factions.Conf;
 import com.massivecraft.factions.FactionsPlugin;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
@@ -29,7 +28,7 @@ public class BrigadierManager {
         LiteralArgumentBuilder<Object> factionsBrigadier = LiteralArgumentBuilder.literal("factions");
         LiteralArgumentBuilder<Object> fBrigadier = LiteralArgumentBuilder.literal("f");
 
-        for (FCommand command : cmdBase.subCommands) {
+        for (FCommand command : cmdBase.getSubCommands()) {
             List<ArgumentBuilder<Object, ?>> aliases = addCommand(command);
             aliases.forEach(alias -> {
                 factionsBrigadier.then(alias);
@@ -42,13 +41,13 @@ public class BrigadierManager {
     }
 
     private List<ArgumentBuilder<Object, ?>> addCommand(FCommand command) {
-        List<ArgumentBuilder<Object, ?>> aliases = command.aliases.stream()
+        List<ArgumentBuilder<Object, ?>> aliases = command.getAliases().stream()
                 .map(alias -> createCommandAliasLiteral(command, alias))
                 .collect(Collectors.toList());
 
         aliases.forEach(literal -> {
             // Add subcommands to the current command
-            List<FCommand> subCommands = command.subCommands;
+            List<FCommand> subCommands = command.getSubCommands();
             subCommands.stream().map(this::addCommand).forEach(subLiterals -> subLiterals.forEach(literal::then));
         });
         return aliases;
@@ -56,7 +55,7 @@ public class BrigadierManager {
 
     private ArgumentBuilder<Object, ?> createCommandAliasLiteral(FCommand command, String alias) {
         LiteralArgumentBuilder<Object> literal = LiteralArgumentBuilder.literal(alias);
-        Class<? extends BrigadierProvider> brigadier = command.requirements.getBrigadier();
+        Class<? extends BrigadierProvider> brigadier = command.getRequirements().getBrigadier();
         if (brigadier != null) {
             // Command has it's own brigadier provider
             try {
