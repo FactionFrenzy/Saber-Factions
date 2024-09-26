@@ -106,7 +106,6 @@ public class FactionsEntityListener implements Listener {
 
         try {
             Entity damagee = event.getEntity();
-            boolean playerHurt = damagee instanceof Player;
 
             if (event instanceof EntityDamageByEntityEvent) {
                 EntityDamageByEntityEvent sub = (EntityDamageByEntityEvent) event;
@@ -184,7 +183,7 @@ public class FactionsEntityListener implements Listener {
                     //this one should trigger if something other than a player takes damage
                     if (damager instanceof Player) return;
                 }
-                if (damageee != null && damageee instanceof Player && (playerHurt && FactionsPlugin.getInstance().getConfig().getBoolean("ffly.disable-flight-on-player-damage", true) || !playerHurt && FactionsPlugin.getInstance().getConfig().getBoolean("ffly.disable-flight-on-mob-damage"))) {
+                if (damageee != null && damageee instanceof Player) {
                     cancelFStuckTeleport((Player) damageee);
                     combatList.add(damagee.getUniqueId());
                     Bukkit.getScheduler().runTaskLater(FactionsPlugin.instance, () -> combatList.remove(damageee.getUniqueId()), 20L * FactionsPlugin.getInstance().getConfig().getInt("ffly.CombatFlyCooldown"));
@@ -251,9 +250,7 @@ public class FactionsEntityListener implements Listener {
         }
     }
 
-    public void
-
-    cancelFStuckTeleport(Player player) {
+    public void cancelFStuckTeleport(Player player) {
         if (player == null) return;
 
         UUID uuid = player.getUniqueId();
@@ -497,6 +494,7 @@ public class FactionsEntityListener implements Listener {
             if (attacker.hasFriendlyFire() && defender.hasFriendlyFire()) {
                 return false;
             }
+
             if (attacker.hasFriendlyFire() && !defender.hasFriendlyFire()) {
                 if (notify) {
                     attacker.msg(TL.FRIENDLY_FIRE_OFF_ATTACKER, defender.getName());

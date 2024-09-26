@@ -2,6 +2,7 @@ package com.massivecraft.factions.cmd;
 
 import com.massivecraft.factions.FactionsPlugin;
 import com.massivecraft.factions.struct.Permission;
+import com.massivecraft.factions.struct.Role;
 import com.massivecraft.factions.util.CC;
 import com.massivecraft.factions.zcore.util.TL;
 
@@ -64,20 +65,24 @@ public class CmdRules extends FCommand {
         }
         if (context.args.size() >= 2) {
             if (context.args.get(0).equalsIgnoreCase("add")) {
-                String message = "";
-                StringBuilder string = new StringBuilder(message);
-                for (int i = 1; i <= context.args.size() - 1; i++) {
-                    string.append(" ").append(context.args.get(i));
+                if (context.fPlayer.getRole().isAtLeast(Role.MODERATOR)) {
+                    String message = "";
+                    StringBuilder string = new StringBuilder(message);
+                    for (int i = 1; i <= context.args.size() - 1; i++) {
+                        string.append(" ").append(context.args.get(i));
+                    }
+                    context.faction.addRule(string.toString());
+                    context.msg(TL.COMMAND_RULES_ADD_SUCCESS);
                 }
-                context.faction.addRule(string.toString());
-                context.msg(TL.COMMAND_RULES_ADD_SUCCESS);
             }
 
             if (context.args.size() == 2) {
-                if (context.args.get(0).equalsIgnoreCase("remove")) {
-                    int index = context.argAsInt(1);
-                    context.faction.removeRule(index - 1);
-                    context.msg(TL.COMMAND_RULES_REMOVE_SUCCESS);
+                if (context.fPlayer.getRole().isAtLeast(Role.MODERATOR)) {
+                    if (context.args.get(0).equalsIgnoreCase("remove")) {
+                        int index = context.argAsInt(1);
+                        context.faction.removeRule(index - 1);
+                        context.msg(TL.COMMAND_RULES_REMOVE_SUCCESS);
+                    }
                 }
             }
 

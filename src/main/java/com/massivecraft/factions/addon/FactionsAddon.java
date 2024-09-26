@@ -178,22 +178,28 @@ public abstract class FactionsAddon {
      * @throws Exception If an error occurs while exporting the configuration.
      */
     private void exportConfig(String resourceName) throws Exception {
-        try (InputStream stream = this.getClass().getResourceAsStream(resourceName);
-             OutputStream resStreamOut = Files.newOutputStream(Paths.get(plugin.getDataFolder().toString(), "configuration/addons", resourceName.toLowerCase()))) {
-
+        try (InputStream stream = this.getClass().getResourceAsStream(resourceName)) {
             if (stream == null) {
                 throw new Exception("Cannot get resource \"" + resourceName + "\" from Jar file.");
             }
 
-            byte[] buffer = new byte[4096];
-            int readBytes;
-            while ((readBytes = stream.read(buffer)) > 0) {
-                resStreamOut.write(buffer, 0, readBytes);
+            // Prepare the output file path
+            Path outputPath = Paths.get(plugin.getDataFolder().toString(), "configuration/addons", resourceName.toLowerCase());
+
+            // Create directories if they don't exist
+            Files.createDirectories(outputPath.getParent());
+
+            try (OutputStream resStreamOut = Files.newOutputStream(outputPath)) {
+                byte[] buffer = new byte[4096];
+                int readBytes;
+                while ((readBytes = stream.read(buffer)) > 0) {
+                    resStreamOut.write(buffer, 0, readBytes);
+                }
             }
+
             Logger.print(getAddonName() + " config file successfully transferred!", Logger.PrefixType.DEFAULT);
         }
     }
-
     /**
      * Saves the configuration for this addon.
      */
