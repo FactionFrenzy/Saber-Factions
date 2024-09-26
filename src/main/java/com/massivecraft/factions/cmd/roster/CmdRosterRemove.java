@@ -56,7 +56,7 @@ public class CmdRosterRemove extends FCommand {
 
         if(FactionsPlugin.getInstance().getFileManager().getRoster().fetchBoolean("limit-faction-roster-kicks")) {
             int limit = FactionsPlugin.getInstance().getFileManager().getRoster().fetchInt("max-faction-roster-kicks");
-            int kicks = context.faction.getRosterKicks() + 1;
+            int kicks = context.faction.getRosterKicks();
 
             if(kicks > limit) {
                 context.msg(TL.COMMAND_ROSTERREMOVE_MAX_KICKS_REACHED, kicks, limit);

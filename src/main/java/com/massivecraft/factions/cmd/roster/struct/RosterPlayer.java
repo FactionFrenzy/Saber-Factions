@@ -39,7 +39,7 @@ public class RosterPlayer {
 
     public boolean isOnJoinCooldown() {
         int cooldown = FactionsPlugin.getInstance().getFileManager().getRoster().fetchInt("join-faction-cooldown");
-        if(cooldown <= 0) return true;
+        if(cooldown <= 0) return false;
         return System.currentTimeMillis() - lastJoinTime <= 1000L * 60 * cooldown;
         //237812837128 - 0 <= 500
     }

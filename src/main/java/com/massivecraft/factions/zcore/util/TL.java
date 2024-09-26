@@ -192,7 +192,7 @@ public enum TL {
     COMMAND_ALTKICK_NOTMEMBER("&c&l[!] &7This player is not a member of your faction."),
 
     COMMAND_ALTS_LIST_NOALTS("&c&l[!] &7%s does not have any alts in their faction!"),
-    COMMAND_AUTOHELP_HECOMMAND_LEAVE_LEADER_MESSAGELPFOR("Help for command"),
+    COMMAND_AUTOHELP_HELPFOR("Help for command"),
     COMMAND_HOME_OTHER_NOTSET("&c&l[!] &7%s does not have their faction home set!"),
     COMMAND_HOME_TELEPORT_OTHER("&c&l[!] &7You have teleported to %s's faction home!"),
     COMMAND_SHOP_DESCRIPTION("opens shop gui"),
